@@ -1,0 +1,374 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import { business, services } from '../data/site';
+
+const featuredServices = services.filter(s => s.featured);
+---
+
+<BaseLayout
+  title="Home"
+  description="Fresh Face Studio is a boutique skincare studio in North Myrtle Beach, SC. Personalized facials, chemical peels, microneedling & more in a renovated 1950s beach bungalow. Book your appointment today."
+>
+  <Header slot="header" currentPath="/" />
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <p class="hero__eyebrow">North Myrtle Beach, SC</p>
+        <h1 class="hero__title">
+          Skincare That's<br />
+          <em>Actually</em> Personal
+        </h1>
+        <p class="hero__subtitle">
+          Customized facials and advanced skin treatments in a one-of-a-kind 1950s beach bungalow.
+          No cookie-cutter routines. No rushed appointments. Just expert care tailored to your skin.
+        </p>
+        <div class="hero__actions">
+          <a href={business.booking.url} class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+            Book Your Facial
+          </a>
+          <a href="/services" class="btn btn--secondary btn--lg">
+            View Services
+          </a>
+        </div>
+      </div>
+      <div class="hero__visual" aria-hidden="true">
+        <!-- TODO: Replace with actual hero image of the bungalow/studio -->
+        <div class="hero__placeholder">
+          <span>Studio Photo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trust-bar">
+    <div class="container">
+      <div class="trust-bar__items">
+        <div class="trust-item">
+          <strong>Licensed Esthetician</strong>
+          <span>Professional-grade treatments</span>
+        </div>
+        <div class="trust-item">
+          <strong>House Calls Available</strong>
+          <span>We come to you</span>
+        </div>
+        <div class="trust-item">
+          <strong>6 Days a Week</strong>
+          <span>Monday through Saturday</span>
+        </div>
+        <div class="trust-item">
+          <strong>The Bungalow</strong>
+          <span>A 1950s beach house experience</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>What We Do Best</h2>
+        <p class="text-secondary text-lg">
+          Every treatment begins with your skin — what it needs today, what will help it long-term.
+          Here are the services our clients book most.
+        </p>
+      </div>
+      <div class="services-grid">
+        {featuredServices.map(service => (
+          <ServiceCard {...service} />
+        ))}
+      </div>
+      <div class="section-cta">
+        <a href="/services" class="btn btn--secondary">
+          View All {services.length} Services
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUNGALOW STORY -->
+  <section class="section section--alt bungalow">
+    <div class="container">
+      <div class="bungalow__grid">
+        <div class="bungalow__visual">
+          <!-- TODO: Replace with bungalow interior/exterior photos -->
+          <div class="bungalow__placeholder">
+            <span>Bungalow Photos</span>
+          </div>
+        </div>
+        <div class="bungalow__content">
+          <h2>Not a Chain. Not a Suite.<br />A Beach Bungalow.</h2>
+          <p>
+            Fresh Face Studio lives inside a renovated 1950s beach bungalow in North Myrtle Beach.
+            It's the kind of place you walk into and immediately exhale — warm, unhurried, and
+            completely unlike a clinical treatment room or a chair in someone else's salon.
+          </p>
+          <p>
+            This is a one-on-one experience. When you're here, the studio is yours. No double-booking,
+            no rushing you out for the next client, no background noise from a busy spa. Just
+            focused, expert skincare in a space designed to make you feel at home.
+          </p>
+          <a href="/about" class="btn btn--sage">
+            Our Story
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCAL SEO CONTENT BLOCK -->
+  <section class="section local-seo">
+    <div class="container container--narrow">
+      <h2>Skincare Services in North Myrtle Beach & the Grand Strand</h2>
+      <p>
+        Fresh Face Studio serves clients throughout the Grand Strand area, including North Myrtle Beach,
+        Myrtle Beach, Little River, Conway, Surfside Beach, Garden City, Murrell's Inlet, and Pawleys Island.
+        Whether you're a local looking for a trusted esthetician or visiting the coast and want to treat your
+        skin to something special, we're here for you.
+      </p>
+      <p>
+        Our studio specializes in customized facials, chemical peels, microneedling, dermaplaning,
+        nanoneedling, lash lifts, brow lamination, and professional waxing. Every treatment is tailored
+        to your individual skin type and concerns — because your skin doesn't look like anyone else's,
+        and your treatment shouldn't either.
+      </p>
+    </div>
+  </section>
+
+  <!-- BOOKING CTA -->
+  <section class="section booking-cta">
+    <div class="container">
+      <div class="booking-cta__inner">
+        <h2>Your Skin Deserves Better Than Guesswork</h2>
+        <p>
+          Book your appointment at Fresh Face Studio. We'll start with your skin,
+          figure out what it actually needs, and build a treatment plan from there.
+        </p>
+        <div class="booking-cta__actions">
+          <a href={business.booking.url} class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+            Book Your Appointment
+          </a>
+          <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`} class="booking-cta__phone">
+            or call {business.phone}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  /* HERO */
+  .hero {
+    padding: var(--space-3xl) 0 var(--space-4xl);
+  }
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1.2fr 1fr;
+      gap: var(--space-4xl);
+    }
+  }
+
+  .hero__eyebrow {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-sage);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero__title {
+    font-size: var(--text-5xl);
+    line-height: 1.1;
+    margin-bottom: var(--space-lg);
+  }
+  .hero__title em {
+    color: var(--accent);
+    font-style: italic;
+  }
+  @media (max-width: 768px) {
+    .hero__title { font-size: var(--text-3xl); }
+  }
+
+  .hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .hero__placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    border: 2px dashed var(--border);
+  }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--bg-secondary);
+    padding: var(--space-xl) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .trust-bar__items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .trust-bar__items {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .trust-item strong {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+  }
+  .trust-item span {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto var(--space-2xl);
+  }
+  .section-header h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  /* SERVICES GRID */
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  @media (min-width: 600px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1000px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .section-cta {
+    text-align: center;
+    margin-top: var(--space-2xl);
+  }
+
+  /* BUNGALOW */
+  .bungalow__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .bungalow__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .bungalow__content h2 {
+    margin-bottom: var(--space-lg);
+  }
+  .bungalow__content p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+  }
+  .bungalow__content .btn {
+    margin-top: var(--space-md);
+  }
+  .bungalow__placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    border: 2px dashed var(--border);
+  }
+
+  /* LOCAL SEO */
+  .local-seo {
+    text-align: center;
+  }
+  .local-seo h2 {
+    margin-bottom: var(--space-lg);
+  }
+  .local-seo p {
+    color: var(--text-secondary);
+  }
+
+  /* BOOKING CTA */
+  .booking-cta {
+    background: var(--color-sage);
+    color: white;
+  }
+  .booking-cta__inner {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .booking-cta__inner h2 {
+    color: white;
+    margin-bottom: var(--space-md);
+  }
+  .booking-cta__inner p {
+    color: rgba(255,255,255,0.85);
+    margin-bottom: var(--space-xl);
+  }
+  .booking-cta__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  .booking-cta__phone {
+    color: rgba(255,255,255,0.75);
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+  .booking-cta__phone:hover {
+    color: white;
+  }
+</style>

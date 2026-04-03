@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { business } from '../data/site';
+
+const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(business.address.full)}`;
+---
+
+<BaseLayout
+  title="Contact"
+  description="Visit Fresh Face Studio at 1626 Hwy 17 S Suite F, North Myrtle Beach, SC 29582. Call (843) 457-2448 to book your skincare appointment."
+>
+  <Header slot="header" currentPath="/contact" />
+
+  <section class="page-hero">
+    <div class="container container--narrow">
+      <h1>Get In Touch</h1>
+      <p>We'd love to hear from you. Book online, give us a call, or stop by the bungalow.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-block">
+            <h3>Visit the Studio</h3>
+            <p>
+              <a href={mapUrl} target="_blank" rel="noopener">
+                {business.address.street}<br />
+                {business.address.city}, {business.address.state} {business.address.zip}
+              </a>
+            </p>
+          </div>
+
+          <div class="contact-block">
+            <h3>Call or Text</h3>
+            <p>
+              <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`} class="contact-phone">
+                {business.phone}
+              </a>
+            </p>
+          </div>
+
+          <div class="contact-block">
+            <h3>Hours</h3>
+            <p>Monday – Saturday: 9 AM – 5 PM<br />Sunday: Closed</p>
+          </div>
+
+          <div class="contact-block">
+            <h3>Book Online</h3>
+            <p>
+              <a href={business.booking.url} target="_blank" rel="noopener" class="btn btn--primary">
+                Book Your Appointment
+              </a>
+            </p>
+          </div>
+
+          <div class="contact-block">
+            <h3>House Calls</h3>
+            <p>
+              Can't make it to the studio? We offer house calls throughout the
+              North Myrtle Beach and Myrtle Beach area. Call to arrange.
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-map">
+          <!-- Static map placeholder — TODO: Replace with Google Maps embed or static map image -->
+          <div class="map-placeholder">
+            <a href={mapUrl} target="_blank" rel="noopener">
+              <span>View on Google Maps</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-3xl) 0 var(--space-xl);
+    text-align: center;
+  }
+  .page-hero p {
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+  @media (min-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .contact-block {
+    margin-bottom: var(--space-xl);
+  }
+  .contact-block h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-sm);
+  }
+  .contact-block p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+  .contact-block a {
+    color: var(--accent);
+  }
+
+  .contact-phone {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    font-family: var(--font-serif);
+  }
+
+  .map-placeholder {
+    aspect-ratio: 1;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--border);
+  }
+  .map-placeholder a {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+  }
+</style>

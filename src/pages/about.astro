@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { business } from '../data/site';
+---
+
+<BaseLayout
+  title="About"
+  description="Fresh Face Studio is a boutique esthetician studio inside a renovated 1950s beach bungalow in North Myrtle Beach, SC. Meet Maria and learn why personal skincare matters."
+>
+  <Header slot="header" currentPath="/about" />
+
+  <section class="page-hero">
+    <div class="container container--narrow">
+      <h1>About Fresh Face Studio</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual">
+          <!-- TODO: Replace with photo of Maria / the bungalow -->
+          <div class="about-placeholder">
+            <span>Photo of Maria in the Studio</span>
+          </div>
+        </div>
+        <div class="about-content">
+          <h2>A Cozy Studio.<br />A Real Person.<br />Skin That Actually Improves.</h2>
+          <p>
+            Fresh Face Studio isn't a chain, a franchise, or a chair inside someone else's business.
+            It's a boutique skincare studio inside a renovated 1950s beach bungalow in North Myrtle Beach —
+            a space with character, warmth, and the kind of quiet that lets you actually relax.
+          </p>
+          <p>
+            When you walk in, it's just you. No double-booking. No background noise from a busy salon.
+            No assembly-line treatments. Every facial is customized to what your skin needs that day,
+            using professional-grade products and techniques, delivered by a licensed esthetician who
+            takes the time to understand your skin's history and goals.
+          </p>
+          <p>
+            This is skincare that's built on connection — real conversations about what's working,
+            what's not, and what to try next. Not a script. Not an upsell. Just honest guidance from
+            someone who genuinely cares about your results.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow" style="text-align:center;">
+      <h2>The Bungalow</h2>
+      <p class="text-secondary text-lg" style="margin-bottom:var(--space-xl);">
+        There's a reason clients say the experience at Fresh Face feels different. The 1950s beach bungalow
+        isn't just a location — it's part of the treatment. Natural light, coastal warmth, and a space
+        that feels like visiting a friend who happens to be an expert in skin.
+      </p>
+      <!-- TODO: Add bungalow photo gallery -->
+      <div class="bungalow-gallery">
+        <div class="gallery-placeholder"><span>Exterior</span></div>
+        <div class="gallery-placeholder"><span>Treatment Room</span></div>
+        <div class="gallery-placeholder"><span>Details</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="info-grid">
+        <div class="info-block">
+          <h3>Location</h3>
+          <p>
+            {business.address.street}<br />
+            {business.address.city}, {business.address.state} {business.address.zip}
+          </p>
+        </div>
+        <div class="info-block">
+          <h3>Hours</h3>
+          <p>Monday – Saturday: 9 AM – 5 PM<br />Sunday: Closed</p>
+        </div>
+        <div class="info-block">
+          <h3>Contact</h3>
+          <p>
+            <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`}>{business.phone}</a>
+          </p>
+        </div>
+        <div class="info-block">
+          <h3>Cancellation Policy</h3>
+          <p>
+            30% cancellation fee for no-shows or cancellations within 24 hours of your appointment.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section booking-cta">
+    <div class="container container--narrow" style="text-align:center;">
+      <h2>Come See What Everyone's Talking About</h2>
+      <p style="margin-bottom:var(--space-xl); color:rgba(255,255,255,0.85);">
+        Book your first visit to the bungalow.
+      </p>
+      <a href={business.booking.url} class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+        Book Your Appointment
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-3xl) 0 var(--space-xl);
+    text-align: center;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .about-grid { grid-template-columns: 1fr 1.2fr; }
+  }
+
+  .about-placeholder, .gallery-placeholder {
+    aspect-ratio: 3/4;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    border: 2px dashed var(--border);
+  }
+
+  .about-content h2 {
+    margin-bottom: var(--space-lg);
+  }
+  .about-content p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+  }
+
+  .bungalow-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+  .gallery-placeholder {
+    aspect-ratio: 1;
+  }
+  @media (max-width: 600px) {
+    .bungalow-gallery { grid-template-columns: 1fr; }
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr; }
+  }
+  .info-block h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-sm);
+  }
+  .info-block p {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.8;
+  }
+
+  .booking-cta {
+    background: var(--color-sage);
+    color: white;
+  }
+  .booking-cta h2 {
+    color: white;
+  }
+</style>

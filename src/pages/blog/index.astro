@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// In production, this will pull from src/content/blog/ markdown files
+// For now, placeholder structure
+const posts: any[] = [];
+---
+
+<BaseLayout
+  title="Skin School — Skincare Tips & Education"
+  description="Expert skincare tips, treatment guides, and coastal skin advice from a licensed esthetician in North Myrtle Beach, SC. Learn how to take care of your skin between appointments."
+>
+  <Header slot="header" currentPath="/blog" />
+
+  <section class="page-hero">
+    <div class="container container--narrow">
+      <h1>Skin School</h1>
+      <p>
+        Honest skincare education from a licensed esthetician. No sponsored content.
+        No affiliate tricks. Just what actually works for your skin.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      {posts.length > 0 ? (
+        <div class="blog-grid">
+          {/* Blog post cards will render here */}
+        </div>
+      ) : (
+        <div class="blog-empty">
+          <h2>Coming Soon</h2>
+          <p>
+            We're building out our skincare education library. In the meantime,
+            follow us on social media for tips and updates, or book a consultation
+            to get personalized advice in person.
+          </p>
+          <p class="blog-empty__note">
+            <strong>Content planned:</strong> Coastal skin survival tips, chemical peel vs. microneedling guide,
+            skincare ingredient breakdowns, seasonal routine adjustments for beach living,
+            and myth-busting the most common skincare advice.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-3xl) 0 var(--space-xl);
+    text-align: center;
+  }
+  .page-hero p {
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+    max-width: 550px;
+    margin: 0 auto;
+  }
+
+  .blog-empty {
+    text-align: center;
+    padding: var(--space-3xl) 0;
+  }
+  .blog-empty h2 {
+    margin-bottom: var(--space-md);
+  }
+  .blog-empty p {
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .blog-empty__note {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg);
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    font-size: var(--text-sm);
+    text-align: left;
+  }
+
+  .blog-grid {
+    display: grid;
+    gap: var(--space-xl);
+  }
+</style>

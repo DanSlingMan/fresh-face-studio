@@ -1,0 +1,250 @@
+---
+import { business } from '../data/site';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '' } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/about', label: 'About' },
+  { href: '/blog', label: 'Skin School' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<header class="site-header" id="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="site-header__logo" aria-label="Fresh Face Studio — Home">
+      <span class="logo-text">{business.name}</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul class="site-nav__list" id="nav-list">
+        {navLinks.map(link => (
+          <li>
+            <a
+              href={link.href}
+              class:list={['site-nav__link', { 'is-active': currentPath === link.href }]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href={business.booking.url} class="btn btn--primary btn--sm site-header__cta" target="_blank" rel="noopener">
+      Book Now
+    </a>
+
+    <button
+      class="site-header__toggle"
+      id="nav-toggle"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Toggle navigation menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile nav -->
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <ul class="mobile-nav__list">
+      {navLinks.map(link => (
+        <li>
+          <a
+            href={link.href}
+            class:list={['mobile-nav__link', { 'is-active': currentPath === link.href }]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a href={business.booking.url} class="btn btn--primary btn--lg mobile-nav__cta" target="_blank" rel="noopener">
+      Book Now
+    </a>
+    <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`} class="mobile-nav__phone">
+      {business.phone}
+    </a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow var(--transition-base);
+  }
+  .site-header.is-scrolled {
+    box-shadow: 0 2px 16px rgba(44, 40, 37, 0.06);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: var(--space-lg);
+  }
+
+  .site-header__logo {
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .logo-text {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .site-nav {
+    display: none;
+  }
+  @media (min-width: 900px) {
+    .site-nav { display: block; }
+  }
+
+  .site-nav__list {
+    display: flex;
+    list-style: none;
+    gap: var(--space-xl);
+  }
+  .site-nav__link {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    padding: var(--space-xs) 0;
+    border-bottom: 2px solid transparent;
+    transition: all var(--transition-fast);
+  }
+  .site-nav__link:hover,
+  .site-nav__link.is-active {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent);
+  }
+
+  .site-header__cta {
+    display: none;
+  }
+  @media (min-width: 900px) {
+    .site-header__cta { display: inline-flex; }
+  }
+
+  /* Mobile toggle */
+  .site-header__toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+    z-index: 110;
+  }
+  .site-header__toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: all var(--transition-base);
+    border-radius: 2px;
+  }
+  .site-header__toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .site-header__toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .site-header__toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+  @media (min-width: 900px) {
+    .site-header__toggle { display: none; }
+  }
+
+  /* Mobile nav overlay */
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-primary);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xl);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+  }
+  .mobile-nav.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-nav__list {
+    list-style: none;
+    text-align: center;
+  }
+  .mobile-nav__link {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: var(--space-md) 0;
+    transition: color var(--transition-fast);
+  }
+  .mobile-nav__link:hover,
+  .mobile-nav__link.is-active {
+    color: var(--accent);
+  }
+
+  .mobile-nav__phone {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  @media (min-width: 900px) {
+    .mobile-nav { display: none; }
+  }
+</style>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.getElementById('nav-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    mobileNav?.classList.toggle('is-open');
+    mobileNav?.setAttribute('aria-hidden', String(isOpen));
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  });
+
+  // Scroll shadow
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header?.classList.toggle('is-scrolled', window.scrollY > 10);
+  }, { passive: true });
+</script>

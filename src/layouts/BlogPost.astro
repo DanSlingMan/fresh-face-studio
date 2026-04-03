@@ -1,0 +1,253 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { business } from '../data/site';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate: string;
+    author?: string;
+    tags?: string[];
+    ogImage?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+
+const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+/* JSON-LD: Article structured data for blog posts */
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: frontmatter.title,
+  description: frontmatter.description,
+  datePublished: frontmatter.pubDate,
+  author: {
+    '@type': 'Organization',
+    name: business.name,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: business.name,
+    url: 'https://freshfacestudio.com',
+  },
+};
+---
+
+<BaseLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  ogType="article"
+  ogImage={frontmatter.ogImage}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+
+  <Header slot="header" currentPath="/blog" />
+
+  <article class="blog-post">
+    <header class="blog-post__header">
+      <div class="container container--narrow">
+        <a href="/blog" class="blog-post__back">&larr; Back to Skin School</a>
+        <h1>{frontmatter.title}</h1>
+        <div class="blog-post__meta">
+          <time datetime={frontmatter.pubDate}>{formattedDate}</time>
+          {frontmatter.author && <span class="meta-divider">·</span>}
+          {frontmatter.author && <span>{frontmatter.author}</span>}
+        </div>
+        {frontmatter.tags && (
+          <div class="blog-post__tags">
+            {frontmatter.tags.map(tag => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+
+    <div class="blog-post__body">
+      <div class="container container--narrow">
+        <div class="prose">
+          <slot />
+        </div>
+      </div>
+    </div>
+
+    <footer class="blog-post__footer">
+      <div class="container container--narrow">
+        <div class="post-cta">
+          <h3>Ready to Try One of These Treatments?</h3>
+          <p>Book your appointment at Fresh Face Studio in North Myrtle Beach.</p>
+          <a href={business.booking.url} class="btn btn--primary" target="_blank" rel="noopener">
+            Book Now
+          </a>
+        </div>
+      </div>
+    </footer>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .blog-post__header {
+    padding: var(--space-3xl) 0 var(--space-xl);
+  }
+
+  .blog-post__back {
+    display: inline-block;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-bottom: var(--space-lg);
+    transition: color var(--transition-fast);
+  }
+  .blog-post__back:hover {
+    color: var(--accent);
+  }
+
+  .blog-post__header h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-md);
+    max-width: 700px;
+  }
+  @media (max-width: 768px) {
+    .blog-post__header h1 { font-size: var(--text-2xl); }
+  }
+
+  .blog-post__meta {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .meta-divider {
+    color: var(--border);
+  }
+
+  .blog-post__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+  .tag {
+    font-size: var(--text-xs);
+    padding: 0.25rem 0.75rem;
+    background: var(--bg-secondary);
+    border-radius: 100px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* Prose styles for markdown content */
+  .prose {
+    font-size: var(--text-lg);
+    line-height: 1.8;
+    color: var(--text-primary);
+  }
+  .prose :global(h1),
+  .prose :global(h2),
+  .prose :global(h3) {
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+  }
+  .prose :global(h2) { font-size: var(--text-2xl); }
+  .prose :global(h3) { font-size: var(--text-xl); }
+
+  .prose :global(p) {
+    margin-bottom: var(--space-lg);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-xl);
+  }
+  .prose :global(li) {
+    margin-bottom: var(--space-sm);
+  }
+
+  .prose :global(strong) {
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .prose :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose :global(a:hover) {
+    color: var(--accent-hover);
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--accent);
+    padding-left: var(--space-lg);
+    margin: var(--space-xl) 0;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-xl) 0;
+    font-size: var(--text-sm);
+  }
+  .prose :global(th) {
+    text-align: left;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 2px solid var(--border);
+    font-weight: 700;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+  }
+  .prose :global(td) {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: var(--space-2xl) 0;
+  }
+
+  .prose :global(img) {
+    border-radius: var(--border-radius);
+    margin: var(--space-xl) 0;
+  }
+
+  /* Post CTA */
+  .blog-post__footer {
+    padding: var(--space-2xl) 0 var(--space-4xl);
+  }
+  .post-cta {
+    text-align: center;
+    padding: var(--space-2xl);
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg);
+  }
+  .post-cta h3 {
+    margin-bottom: var(--space-sm);
+  }
+  .post-cta p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+</style>

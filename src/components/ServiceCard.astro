@@ -1,0 +1,100 @@
+---
+import { business } from '../data/site';
+
+interface Props {
+  slug: string;
+  name: string;
+  price: number;
+  priceNote?: string;
+  duration: number;
+  shortDescription: string;
+  category: string;
+  featured?: boolean;
+}
+
+const { slug, name, price, priceNote, duration, shortDescription, featured } = Astro.props;
+---
+
+<article class:list={['service-card', { 'service-card--featured': featured }]} id={slug}>
+  <div class="service-card__body">
+    <h3 class="service-card__name">{name}</h3>
+    <div class="service-card__meta">
+      <span class="service-card__price">
+        {priceNote && <span class="price-note">{priceNote} </span>}${price}
+      </span>
+      <span class="service-card__divider">·</span>
+      <span class="service-card__duration">{duration} min</span>
+    </div>
+    <p class="service-card__desc">{shortDescription}</p>
+  </div>
+  <div class="service-card__action">
+    <a href={business.booking.url} class="btn btn--primary btn--sm" target="_blank" rel="noopener">
+      Book This Service
+    </a>
+  </div>
+</article>
+
+<style>
+  .service-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    transition: box-shadow var(--transition-base), border-color var(--transition-base);
+  }
+  .service-card:hover {
+    box-shadow: 0 4px 24px rgba(44, 40, 37, 0.08);
+    border-color: var(--color-sage);
+  }
+  .service-card--featured {
+    border-color: var(--color-terracotta-light);
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--color-terracotta-light) 100%);
+  }
+
+  .service-card__name {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .service-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    font-size: var(--text-sm);
+  }
+
+  .service-card__price {
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .price-note {
+    font-weight: 400;
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+  }
+
+  .service-card__divider {
+    color: var(--border);
+  }
+
+  .service-card__duration {
+    color: var(--text-secondary);
+  }
+
+  .service-card__desc {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .service-card__action {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border);
+  }
+</style>

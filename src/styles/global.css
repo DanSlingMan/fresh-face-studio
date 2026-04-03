@@ -1,0 +1,271 @@
+/*
+ * Fresh Face Studio — Design System
+ * 
+ * Brand direction: Warm coastal luxury. Not clinical, not cutesy.
+ * The bungalow is the brand — warm wood, natural light, ocean air.
+ * Typography: editorial serif + clean sans-serif.
+ * Colors: sand, warm white, coastal sage, terracotta accents.
+ */
+
+/* ===== FONTS ===== */
+/* Loaded via <link> in BaseLayout.astro */
+
+/* ===== CUSTOM PROPERTIES ===== */
+:root {
+  /* Brand palette */
+  --color-cream: #FAF7F2;
+  --color-sand: #F0EBE1;
+  --color-warm-white: #FFFDF9;
+  --color-sage: #7A8B6F;
+  --color-sage-light: #E8EDE5;
+  --color-sage-dark: #5A6B4F;
+  --color-terracotta: #C17B5A;
+  --color-terracotta-light: #F5E6DC;
+  --color-charcoal: #2C2825;
+  --color-warm-gray: #6B6560;
+  --color-warm-gray-light: #A09A94;
+  --color-border: #E0D9CF;
+
+  /* Semantic tokens */
+  --bg-primary: var(--color-warm-white);
+  --bg-secondary: var(--color-cream);
+  --bg-accent: var(--color-sage-light);
+  --text-primary: var(--color-charcoal);
+  --text-secondary: var(--color-warm-gray);
+  --text-accent: var(--color-sage-dark);
+  --accent: var(--color-terracotta);
+  --accent-hover: #A8674A;
+  --border: var(--color-border);
+
+  /* Typography scale */
+  --font-serif: 'Lora', 'Georgia', serif;
+  --font-sans: 'Nunito Sans', 'Helvetica Neue', sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3.25rem;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+
+  /* Layout */
+  --max-width: 1200px;
+  --max-width-narrow: 800px;
+  --max-width-wide: 1400px;
+  --border-radius: 8px;
+  --border-radius-lg: 16px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  line-height: 1.7;
+  font-size: var(--text-base);
+}
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-primary);
+}
+
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+
+@media (max-width: 768px) {
+  h1 { font-size: var(--text-3xl); }
+  h2 { font-size: var(--text-2xl); }
+  h3 { font-size: var(--text-xl); }
+}
+
+p + p { margin-top: var(--space-md); }
+
+.text-secondary { color: var(--text-secondary); }
+.text-accent { color: var(--text-accent); }
+.text-sm { font-size: var(--text-sm); }
+.text-lg { font-size: var(--text-lg); }
+
+/* ===== LAYOUT UTILITIES ===== */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.container--narrow {
+  max-width: var(--max-width-narrow);
+}
+
+.container--wide {
+  max-width: var(--max-width-wide);
+}
+
+.section {
+  padding: var(--space-4xl) 0;
+}
+
+.section--alt {
+  background-color: var(--bg-secondary);
+}
+
+.section--sage {
+  background-color: var(--bg-accent);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0.875rem 2rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.btn--primary {
+  background-color: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.btn--primary:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: white;
+}
+
+.btn--secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+.btn--secondary:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.btn--sage {
+  background-color: var(--color-sage);
+  color: white;
+  border-color: var(--color-sage);
+}
+.btn--sage:hover {
+  background-color: var(--color-sage-dark);
+  border-color: var(--color-sage-dark);
+  color: white;
+}
+
+.btn--sm {
+  padding: 0.625rem 1.25rem;
+  font-size: var(--text-xs);
+}
+
+.btn--lg {
+  padding: 1.125rem 2.5rem;
+  font-size: var(--text-base);
+}
+
+/* ===== CARD ===== */
+.card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  transition: box-shadow var(--transition-base);
+}
+.card:hover {
+  box-shadow: 0 4px 24px rgba(44, 40, 37, 0.08);
+}
+.card__body {
+  padding: var(--space-xl);
+}
+
+/* ===== STRUCTURED DATA / SEO HELPERS ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== SKIP LINK ===== */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  z-index: 9999;
+  border-radius: var(--border-radius);
+  font-size: var(--text-sm);
+}
+.skip-link:focus {
+  top: var(--space-md);
+}

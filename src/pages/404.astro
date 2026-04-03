@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { business } from '../data/site';
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="The page you're looking for doesn't exist. Head back to Fresh Face Studio's homepage or book an appointment."
+  noindex={true}
+>
+  <Header slot="header" />
+
+  <section class="not-found">
+    <div class="container container--narrow">
+      <h1>404</h1>
+      <p class="not-found__message">
+        This page doesn't exist — but your next facial appointment could.
+      </p>
+      <div class="not-found__actions">
+        <a href="/" class="btn btn--secondary">Back to Home</a>
+        <a href={business.booking.url} class="btn btn--primary" target="_blank" rel="noopener">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding: var(--space-4xl) 0;
+    text-align: center;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+  .not-found h1 {
+    font-size: 8rem;
+    line-height: 1;
+    color: var(--border);
+    margin-bottom: var(--space-md);
+  }
+  .not-found__message {
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .not-found__actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+</style>

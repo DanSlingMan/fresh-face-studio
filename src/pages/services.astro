@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import { business, services, serviceCategories } from '../data/site';
+---
+
+<BaseLayout
+  title="Skincare Services"
+  description="Facials, chemical peels, microneedling, dermaplaning, lash lifts, brow lamination & waxing in North Myrtle Beach, SC. View all services and pricing at Fresh Face Studio."
+>
+  <Header slot="header" currentPath="/services" />
+
+  <section class="page-hero">
+    <div class="container container--narrow">
+      <h1>Our Services</h1>
+      <p>
+        Every treatment is customized to your skin type, concerns, and goals.
+        We don't do one-size-fits-all — because your skin doesn't work that way.
+      </p>
+    </div>
+  </section>
+
+  {serviceCategories.map(category => {
+    const categoryServices = services.filter(s => s.category === category.slug);
+    if (categoryServices.length === 0) return null;
+    return (
+      <section class="section category-section" id={category.slug}>
+        <div class="container">
+          <div class="category-header">
+            <h2>{category.name}</h2>
+            <p class="text-secondary">{category.description}</p>
+          </div>
+          <div class="services-grid">
+            {categoryServices.map(service => (
+              <ServiceCard {...service} />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <!-- CONSULTATION CTA -->
+  <section class="section section--alt">
+    <div class="container container--narrow" style="text-align:center;">
+      <h2>Not Sure Which Service Is Right for You?</h2>
+      <p class="text-secondary" style="margin-bottom:var(--space-xl);">
+        Book a free consultation. We'll look at your skin, talk about your concerns,
+        and recommend the treatment that will actually make a difference — not the most expensive one.
+      </p>
+      <a href={business.booking.url} class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+        Book a Free Consultation
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-3xl) 0 var(--space-2xl);
+    text-align: center;
+  }
+  .page-hero h1 {
+    margin-bottom: var(--space-md);
+  }
+  .page-hero p {
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+    max-width: 550px;
+    margin: 0 auto;
+  }
+
+  .category-section:nth-child(even) {
+    background: var(--bg-secondary);
+  }
+
+  .category-header {
+    margin-bottom: var(--space-xl);
+  }
+  .category-header h2 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  @media (min-width: 600px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1000px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,165 @@
+---
+import { business } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <h3 class="footer-logo">{business.name}</h3>
+        <p class="footer-tagline">{business.tagline}</p>
+        <p class="footer-address">
+          {business.address.street}<br />
+          {business.address.city}, {business.address.state} {business.address.zip}
+        </p>
+        <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`} class="footer-phone">
+          {business.phone}
+        </a>
+      </div>
+
+      <!-- Navigation -->
+      <div class="footer-nav">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/blog">Skin School</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Services quick links -->
+      <div class="footer-nav">
+        <h4>Popular Services</h4>
+        <ul>
+          <li><a href="/services#classic-facial">Classic Facial</a></li>
+          <li><a href="/services#custom-facial">Custom Facial</a></li>
+          <li><a href="/services#chemical-peel">Chemical Peel</a></li>
+          <li><a href="/services#microneedling">Microneedling</a></li>
+          <li><a href="/services#lash-lift-tint">Lash Lift & Tint</a></li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="footer-cta">
+        <h4>Ready for Better Skin?</h4>
+        <p>Book your appointment at our North Myrtle Beach studio.</p>
+        <a href={business.booking.url} class="btn btn--primary" target="_blank" rel="noopener">
+          Book Now
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {new Date().getFullYear()} {business.name}. All rights reserved.</p>
+      <p class="footer-bottom__serving">
+        Serving North Myrtle Beach, Myrtle Beach, Little River, Conway, Surfside Beach, Pawleys Island, and the Grand Strand.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-charcoal);
+    color: var(--color-sand);
+    padding: var(--space-4xl) 0 var(--space-xl);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    }
+  }
+
+  .footer-logo {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    color: var(--color-warm-white);
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-tagline {
+    font-size: var(--text-sm);
+    color: var(--color-warm-gray-light);
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-address {
+    font-size: var(--text-sm);
+    line-height: 1.8;
+    color: var(--color-warm-gray-light);
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-phone {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-terracotta);
+    text-decoration: none;
+  }
+  .footer-phone:hover {
+    color: var(--color-warm-white);
+  }
+
+  .footer-nav h4 {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-warm-white);
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-nav ul {
+    list-style: none;
+  }
+  .footer-nav li {
+    margin-bottom: var(--space-sm);
+  }
+  .footer-nav a {
+    font-size: var(--text-sm);
+    color: var(--color-warm-gray-light);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .footer-nav a:hover {
+    color: var(--color-warm-white);
+  }
+
+  .footer-cta h4 {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    color: var(--color-warm-white);
+    margin-bottom: var(--space-sm);
+  }
+  .footer-cta p {
+    font-size: var(--text-sm);
+    color: var(--color-warm-gray-light);
+    margin-bottom: var(--space-lg);
+  }
+
+  .footer-bottom {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+  }
+  .footer-bottom p {
+    font-size: var(--text-xs);
+    color: var(--color-warm-gray-light);
+  }
+  .footer-bottom__serving {
+    margin-top: var(--space-sm);
+    font-size: var(--text-xs);
+    color: var(--color-warm-gray);
+  }
+</style>

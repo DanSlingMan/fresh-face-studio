@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { business, services } from '../data/site';
+
+const calendlyUrl = 'https://calendly.com/REPLACE-WITH-REAL-URL';
+const isCalendlyLive = !calendlyUrl.includes('REPLACE');
+---
+
+<BaseLayout
+  title="Book an Appointment"
+  description="Book a facial, chemical peel, microneedling, or any skincare treatment at Fresh Face Studio in North Myrtle Beach, SC. Online scheduling available."
+>
+  <Header slot="header" currentPath="/book" />
+
+  <section class="page-hero">
+    <div class="container container--narrow">
+      <h1>Book an Appointment</h1>
+      <p>
+        Ready to invest in your skin? Choose a service and time that works for you.
+        Every treatment is customized to your skin when you arrive.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {isCalendlyLive ? (
+        <!-- Calendly inline widget -->
+        <div
+          class="calendly-inline-widget"
+          data-url={calendlyUrl}
+          style="min-width:320px;height:700px;"
+        ></div>
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+      ) : (
+        <!-- Fallback: GlossGenius booking + services grid -->
+        <div class="booking-fallback">
+          <div class="booking-card">
+            <h2>Online Booking Coming Soon</h2>
+            <p>
+              We're setting up online scheduling. In the meantime, book through
+              GlossGenius or give us a call.
+            </p>
+            <div class="booking-card__actions">
+              <a href={business.booking.url} class="btn btn--primary" target="_blank" rel="noopener">
+                Book on GlossGenius
+              </a>
+              <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`} class="btn btn--secondary">
+                Call {business.phone}
+              </a>
+            </div>
+          </div>
+
+          <div class="services-menu">
+            <h3>Our Services & Pricing</h3>
+            <div class="services-menu__grid">
+              {services.map(service => (
+                <div class="services-menu__item">
+                  <div class="services-menu__info">
+                    <span class="services-menu__name">{service.name}</span>
+                    <span class="services-menu__dots"></span>
+                    <span class="services-menu__price">
+                      {'priceNote' in service ? `${(service as any).priceNote} ` : ''}${service.price}
+                    </span>
+                  </div>
+                  <span class="services-menu__duration">{service.duration} min</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Before Your Visit</h3>
+          <p>
+            Arrive with a clean face if possible. Let us know about any medications,
+            allergies, or recent skin treatments. First-time clients should arrive
+            5 minutes early.
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>Cancellation Policy</h3>
+          <p>
+            We understand plans change. Cancellations within 24 hours of your
+            appointment are subject to a 30% service fee. No-shows are charged
+            the full service price.
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>House Calls</h3>
+          <p>
+            Can't make it to the studio? We offer house calls for select treatments
+            within the North Myrtle Beach area. Call us to check availability
+            and pricing.
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>Not Sure What You Need?</h3>
+          <p>
+            No problem. Book a Classic Facial and we'll assess your skin during
+            the treatment. We'll recommend a plan based on what we see — no
+            pressure, just honest advice.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-3xl) 0 var(--space-xl);
+    text-align: center;
+  }
+  .page-hero p {
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+    max-width: 550px;
+    margin: 0 auto;
+  }
+
+  .booking-fallback {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+  }
+
+  .booking-card {
+    text-align: center;
+    padding: var(--space-2xl);
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--space-3xl);
+  }
+  .booking-card h2 {
+    margin-bottom: var(--space-md);
+  }
+  .booking-card p {
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin: 0 auto var(--space-xl);
+  }
+  .booking-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: center;
+  }
+
+  .services-menu h3 {
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+  .services-menu__grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+  .services-menu__item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .services-menu__item:last-child {
+    border-bottom: none;
+  }
+  .services-menu__info {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    flex: 1;
+    min-width: 0;
+  }
+  .services-menu__name {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .services-menu__dots {
+    flex: 1;
+    border-bottom: 2px dotted var(--border);
+    min-width: 20px;
+    align-self: center;
+    margin-bottom: 4px;
+  }
+  .services-menu__price {
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .services-menu__duration {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+  @media (max-width: 768px) {
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .info-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
+  }
+  .info-card h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-sm);
+  }
+  .info-card p {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.7;
+  }
+</style>

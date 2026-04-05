@@ -128,21 +128,64 @@ function parseOutput(text, contentType) {
   return { blogTitle, blogBody, igCaption: igRaw };
 }
 
-function buildMarkdownFile(title, body) {
-  const slug = title
+function buildSlug(title) {
+  return title
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, '')
     .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
     .slice(0, 60);
+}
+
+function inferTags(title, body) {
+  const text = (title + ' ' + body).toLowerCase();
+  const tagMap = [
+    ['facials', ['facial', 'facials']],
+    ['chemical peel', ['chemical peel', 'peel']],
+    ['microneedling', ['microneedling', 'microneedle']],
+    ['dermaplaning', ['dermaplaning', 'dermaplane']],
+    ['skincare routine', ['routine', 'daily routine']],
+    ['sun protection', ['spf', 'sunscreen', 'sun protection', 'uv']],
+    ['acne', ['acne', 'breakout', 'blemish']],
+    ['anti-aging', ['aging', 'wrinkle', 'collagen', 'firming']],
+    ['hydration', ['hydration', 'hydrating', 'moisture', 'dehydrated']],
+    ['exfoliation', ['exfoliat', 'exfoliant']],
+    ['North Myrtle Beach', ['north myrtle beach', 'myrtle beach', 'grand strand']],
+    ['skincare tips', ['tip', 'advice', 'guide', 'how to']],
+    ['beach skincare', ['beach', 'coastal', 'salt air', 'ocean']],
+    ['esthetician', ['esthetician', 'esthetics', 'skin care professional']],
+  ];
+  const tags = [];
+  for (const [tag, keywords] of tagMap) {
+    if (keywords.some(kw => text.includes(kw))) tags.push(tag);
+    if (tags.length >= 4) break;
+  }
+  if (tags.length === 0) tags.push('skincare tips');
+  return tags;
+}
+
+function buildMarkdownFile(title, body) {
+  const slug = buildSlug(title);
   const today = new Date().toISOString().split('T')[0];
+  // Strip markdown for description: remove #, **, *, links, extra whitespace
+  const plainBody = body
+    .replace(/#{1,6}\s+/g, '')
+    .replace(/\*{1,2}([^*]+)\*{1,2}/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\n+/g, ' ')
+    .trim();
+  const description = plainBody.slice(0, 155).replace(/\s\S*$/, '').trim();
+  const tags = inferTags(title, body);
+  const tagsYaml = tags.map(t => `"${t}"`).join(', ');
   const frontmatter = `---
-title: "${title}"
-description: ""
+title: "${title.replace(/"/g, '\\"')}"
+description: "${description.replace(/"/g, '\\"')}"
 pubDate: ${today}
-heroImage: ""
-draft: true
+author: "Fresh Face Studio"
+tags: [${tagsYaml}]
 ---\n\n`;
-  return { content: frontmatter + `# ${title}\n\n` + body, slug };
+  return { content: frontmatter + body, slug };
 }
 
 function downloadTextFile(content, filename) {
@@ -189,6 +232,28 @@ function CopyButton({ text, label = 'Copy to Clipboard' }) {
 
 function BlogOutput({ title, body }) {
   const { content, slug } = buildMarkdownFile(title, body);
+  const [publishState, setPublishState] = useState('idle'); // idle | confirm | publishing | success | error
+  const [publishError, setPublishError] = useState('');
+
+  async function handlePublish() {
+    setPublishState('publishing');
+    setPublishError('');
+    try {
+      const response = await fetch('/api/publish-blog', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug, content, title }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || `Error ${response.status}`);
+      }
+      setPublishState('success');
+    } catch (err) {
+      setPublishError(err.message);
+      setPublishState('error');
+    }
+  }
 
   return (
     <div className="cs-output-panel">
@@ -202,8 +267,49 @@ function BlogOutput({ title, body }) {
           >
             Download .md
           </button>
+          {publishState === 'idle' && (
+            <button
+              className="cs-btn cs-btn--publish cs-btn--sm"
+              onClick={() => setPublishState('confirm')}
+            >
+              Add to Blog
+            </button>
+          )}
+          {publishState === 'confirm' && (
+            <span className="cs-publish-confirm">
+              <span className="cs-publish-confirm__text">Publish to live site?</span>
+              <button className="cs-btn cs-btn--publish cs-btn--sm" onClick={handlePublish}>
+                Publish
+              </button>
+              <button className="cs-btn cs-btn--ghost cs-btn--sm" onClick={() => setPublishState('idle')}>
+                Cancel
+              </button>
+            </span>
+          )}
+          {publishState === 'publishing' && (
+            <span className="cs-publish-status cs-publish-status--loading">
+              <span className="cs-spinner cs-spinner--inline" />
+              Publishing to yourfreshface.com...
+            </span>
+          )}
         </div>
       </div>
+
+      {publishState === 'success' && (
+        <div className="cs-publish-banner cs-publish-banner--success">
+          Published! Your post will be live in about 60 seconds.{' '}
+          <a href={`/blog/${slug}`} className="cs-publish-link" target="_blank" rel="noopener">
+            View at /blog/{slug}
+          </a>
+        </div>
+      )}
+      {publishState === 'error' && (
+        <div className="cs-publish-banner cs-publish-banner--error">
+          Couldn't publish: {publishError}. Use the Download .md button as a fallback.
+          <button className="cs-publish-retry" onClick={() => setPublishState('idle')}>Dismiss</button>
+        </div>
+      )}
+
       <div className="cs-blog-preview">
         <h2 className="cs-blog-preview__title">{title}</h2>
         <div className="cs-blog-preview__body">
@@ -1192,6 +1298,89 @@ export default function ContentStudio() {
         }
         @keyframes cs-spin {
           to { transform: rotate(360deg); }
+        }
+
+        /* Inline spinner (for publish loading) */
+        .cs-spinner--inline {
+          width: 13px;
+          height: 13px;
+          border-width: 2px;
+          border-color: rgba(107,127,103,0.3);
+          border-top-color: #6B7F67;
+          flex-shrink: 0;
+        }
+
+        /* Publish button */
+        .cs-btn--publish {
+          background: #6B7F67;
+          border-color: #6B7F67;
+          color: #FDFBF8;
+        }
+        .cs-btn--publish:hover:not(:disabled) {
+          background: #5a6d56;
+          border-color: #5a6d56;
+        }
+
+        /* Publish confirm inline row */
+        .cs-publish-confirm {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.375rem;
+          flex-wrap: wrap;
+        }
+        .cs-publish-confirm__text {
+          font-size: 0.8125rem;
+          color: #2D2926;
+          font-weight: 600;
+        }
+
+        /* Publish status (loading text) */
+        .cs-publish-status {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.8125rem;
+          font-weight: 600;
+        }
+        .cs-publish-status--loading {
+          color: #6B7F67;
+        }
+
+        /* Publish result banners */
+        .cs-publish-banner {
+          padding: 0.75rem 1.25rem;
+          font-size: 0.875rem;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+        }
+        .cs-publish-banner--success {
+          background: #eaf2e9;
+          border-bottom: 1px solid #c3dbbf;
+          color: #2d4f2a;
+        }
+        .cs-publish-banner--error {
+          background: #fdf2f2;
+          border-bottom: 1px solid #f5c6cb;
+          color: #6b1a1a;
+        }
+        .cs-publish-link {
+          color: #6B7F67;
+          font-weight: 700;
+          text-decoration: underline;
+        }
+        .cs-publish-retry {
+          background: none;
+          border: none;
+          color: #B8907A;
+          font-size: 0.8125rem;
+          font-weight: 700;
+          cursor: pointer;
+          padding: 0;
+          text-decoration: underline;
+          margin-left: auto;
         }
       `}</style>
     </div>

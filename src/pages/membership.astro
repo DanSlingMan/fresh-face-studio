@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 const tiers = [
   {
     id: 'member',
+    tierKey: 'member',
     name: 'Fresh Face Member',
     price: 89,
     tagline: "The \u201cI'm Serious About My Skin\u201d Tier",
@@ -24,6 +25,7 @@ const tiers = [
   },
   {
     id: 'vip',
+    tierKey: 'vip',
     name: 'Fresh Face VIP',
     price: 139,
     tagline: "The \u201cThis Is My Self-Care Ritual\u201d Tier",
@@ -44,6 +46,7 @@ const tiers = [
   },
   {
     id: 'luxe',
+    tierKey: 'luxe',
     name: 'Fresh Face Luxe',
     price: 199,
     tagline: "The \u201cI Want It All\u201d Tier",
@@ -107,6 +110,48 @@ const faqs = [
 >
   <Header slot="header" currentPath="/membership" />
 
+  <!-- STATUS BANNERS (shown via JS based on ?success / ?cancelled query) -->
+  <div
+    id="membership-banner-success"
+    class="membership-banner membership-banner--success"
+    role="status"
+    hidden
+  >
+    <div class="container">
+      <p>
+        <strong>Welcome to the Fresh Face family! 🎉</strong>
+        You'll receive a confirmation email shortly. Book your first member facial
+        anytime at <a href="/book">/book</a>.
+      </p>
+      <button
+        type="button"
+        class="membership-banner__close"
+        aria-label="Dismiss"
+        data-banner-close
+      >×</button>
+    </div>
+  </div>
+
+  <div
+    id="membership-banner-cancelled"
+    class="membership-banner membership-banner--cancelled"
+    role="status"
+    hidden
+  >
+    <div class="container">
+      <p>
+        <strong>No worries — take your time.</strong>
+        We'll be here when you're ready.
+      </p>
+      <button
+        type="button"
+        class="membership-banner__close"
+        aria-label="Dismiss"
+        data-banner-close
+      >×</button>
+    </div>
+  </div>
+
   <!-- FULL-BLEED HERO -->
   <section class="page-hero-img" aria-label="Fresh Face Membership hero">
     <img
@@ -169,16 +214,18 @@ const faqs = [
                 ))}
               </ul>
               <div class="tier-card__footer">
-                <a
-                  href="/book"
+                <button
+                  type="button"
+                  data-tier={tier.tierKey}
                   class:list={[
                     'btn',
                     'tier-card__btn',
+                    'tier-card__cta',
                     tier.featured ? 'btn--primary' : 'btn--secondary',
                   ]}
                 >
-                  {tier.ctaLabel}
-                </a>
+                  <span class="tier-card__cta-label">{tier.ctaLabel}</span>
+                </button>
               </div>
             </div>
           </article>
@@ -810,4 +857,130 @@ const faqs = [
     .final-cta { padding: var(--space-4xl) 0; }
     .final-cta__content h2 { font-size: var(--text-3xl); }
   }
+
+  /* ===== STATUS BANNERS ===== */
+  .membership-banner {
+    padding: var(--space-md) 0;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .membership-banner .container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+  .membership-banner p {
+    margin: 0;
+    flex: 1;
+  }
+  .membership-banner a {
+    color: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .membership-banner--success {
+    background: var(--color-sage-light);
+    color: var(--color-sage-dark);
+  }
+  .membership-banner--cancelled {
+    background: var(--color-terracotta-light);
+    color: #7B5642;
+  }
+  .membership-banner__close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    padding: 0 var(--space-sm);
+    transition: opacity var(--transition-fast);
+  }
+  .membership-banner__close:hover { opacity: 1; }
+
+  /* ===== CTA LOADING STATE ===== */
+  .tier-card__cta {
+    position: relative;
+  }
+  .tier-card__cta[data-loading="true"] {
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  .tier-card__cta[data-loading="true"] .tier-card__cta-label {
+    visibility: hidden;
+  }
+  .tier-card__cta[data-loading="true"]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    margin: -9px 0 0 -9px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: tier-cta-spin 0.7s linear infinite;
+  }
+  @keyframes tier-cta-spin {
+    to { transform: rotate(360deg); }
+  }
 </style>
+
+<script>
+  // Show success/cancelled banner based on query string
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('success') === 'true') {
+    document.getElementById('membership-banner-success')?.removeAttribute('hidden');
+  }
+  if (params.get('cancelled') === 'true') {
+    document.getElementById('membership-banner-cancelled')?.removeAttribute('hidden');
+  }
+
+  // Banner dismiss
+  document.querySelectorAll('[data-banner-close]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btn.closest('.membership-banner')?.setAttribute('hidden', '');
+    });
+  });
+
+  // Stripe Checkout handlers
+  const tierButtons = document.querySelectorAll<HTMLButtonElement>('[data-tier]');
+  tierButtons.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const tier = btn.getAttribute('data-tier');
+      if (!tier) return;
+
+      btn.setAttribute('data-loading', 'true');
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/api/create-membership', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tier }),
+        });
+
+        if (!res.ok) {
+          throw new Error('Checkout request failed');
+        }
+
+        const data = await res.json();
+        if (data?.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error('No checkout URL returned');
+        }
+      } catch (err) {
+        console.error('Membership checkout error:', err);
+        btn.removeAttribute('data-loading');
+        btn.disabled = false;
+        alert('Sorry, we could not start checkout. Please try again or call us.');
+      }
+    });
+  });
+</script>

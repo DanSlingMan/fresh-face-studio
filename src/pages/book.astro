@@ -2,10 +2,17 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { business, services } from '../data/site';
+import { business, services, serviceCategories } from '../data/site';
 
-const calendlyUrl = 'https://calendly.com/freshface-sc';
-const isCalendlyLive = true;
+const baseCalendlyUrl = 'https://calendly.com/freshface-sc';
+
+function calendlyLink(slug: string): string {
+  return `${baseCalendlyUrl}/${slug}`;
+}
+
+function truncate(text: string, max: number): string {
+  return text.length <= max ? text : text.slice(0, max).trimEnd() + '…';
+}
 ---
 
 <BaseLayout
@@ -14,79 +21,88 @@ const isCalendlyLive = true;
 >
   <Header slot="header" currentPath="/book" />
 
-  <!-- HERO -->
+  <!-- 1. HERO -->
   <section class="page-hero-img" aria-label="Book an appointment">
     <img
-      src="/images/facial-relaxed.jpg"
-      alt="Client relaxing during a facial treatment at Fresh Face Studio"
+      src="/images/facial-treatment.jpg"
+      alt="Client receiving a personalized facial treatment at Fresh Face Studio"
       class="page-hero-img__bg"
       loading="eager"
     />
     <div class="page-hero-img__content">
       <p class="book-eyebrow">Schedule Your Visit</p>
-      <h1>Book an Appointment</h1>
+      <h1>Book Your Visit</h1>
+      <p>Pick a service, pick a time, and leave the rest to Maria.</p>
+    </div>
+  </section>
+
+  <!-- 2. SERVICE BOOKING GRID -->
+  {serviceCategories.map((category, i) => {
+    const categoryServices = services.filter(s => s.category === category.slug);
+    if (categoryServices.length === 0) return null;
+    const isAlt = i % 2 !== 0;
+    return (
+      <section
+        class={`section booking-category${isAlt ? ' section--alt' : ''}`}
+        id={`book-${category.slug}`}
+      >
+        <div class="container">
+          <div class="booking-category__header">
+            <h2>{category.name}</h2>
+            <p class="text-secondary">{category.description}</p>
+          </div>
+          <div class="booking-grid">
+            {categoryServices.map(service => (
+              <div class="booking-card">
+                <div class="booking-card__body">
+                  <div class="booking-card__meta">
+                    <span class="booking-card__duration">{service.duration} min</span>
+                    <span class="booking-card__price">
+                      {'priceNote' in service
+                        ? `From $${service.price}`
+                        : `$${service.price}`}
+                    </span>
+                  </div>
+                  <h3 class="booking-card__name">{service.name}</h3>
+                  <p class="booking-card__desc">
+                    {truncate(service.shortDescription, 80)}
+                  </p>
+                </div>
+                <div class="booking-card__footer">
+                  <a
+                    href={calendlyLink(service.slug)}
+                    class="btn btn--primary booking-card__btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Book ${service.name} on Calendly`}
+                  >
+                    Book Now
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <!-- 3. PHONE CTA -->
+  <section class="phone-cta">
+    <div class="container">
       <p>
-        Pick a service, pick a time, and leave the rest to Maria. Every treatment is
-        customized the moment she sees your skin.
+        Prefer to book by phone?&nbsp;
+        <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`} class="phone-cta__link">
+          Call {business.phone}
+        </a>
       </p>
     </div>
   </section>
 
-  <!-- BOOKING SECTION -->
-  <section class="section">
+  <!-- 4. INFO CARDS -->
+  <section class="section section--alt" aria-labelledby="info-heading">
     <div class="container">
-      {isCalendlyLive ? (
-        <Fragment>
-          <div
-            class="calendly-inline-widget"
-            data-url={`${calendlyUrl}?hide_gdpr_banner=1&primary_color=c17b5a`}
-            style="min-width:320px;height:700px;"
-          ></div>
-          <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-          <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-        </Fragment>
-      ) : (
-        <div class="booking-fallback">
-          <div class="booking-card">
-            <h2>Online Booking Coming Soon</h2>
-            <p>
-              We're setting up online scheduling. In the meantime, give us a call.
-            </p>
-            <div class="booking-card__actions">
-              <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`} class="btn btn--primary btn--lg">
-                Call {business.phone}
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  </section>
-
-  <!-- SERVICES PRICING LIST -->
-  <section class="section section--alt">
-    <div class="container container--narrow">
-      <h2 style="text-align:center; margin-bottom:var(--space-xl);">Services &amp; Pricing</h2>
-      <div class="services-menu">
-        {services.map(service => (
-          <div class="services-menu__item">
-            <div class="services-menu__info">
-              <span class="services-menu__name">{service.name}</span>
-              <span class="services-menu__dots"></span>
-              <span class="services-menu__price">
-                {'priceNote' in service ? `${(service as any).priceNote} ` : ''}${service.price}
-              </span>
-            </div>
-            <span class="services-menu__duration">{service.duration} min</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- INFO CARDS -->
-  <section class="section">
-    <div class="container">
+      <h2 id="info-heading" class="info-section__heading">Good to Know</h2>
       <div class="info-grid">
         <div class="info-card">
           <div class="info-card__icon" aria-hidden="true">✦</div>
@@ -132,6 +148,7 @@ const isCalendlyLive = true;
 </BaseLayout>
 
 <style>
+  /* HERO EYEBROW */
   .book-eyebrow {
     font-size: var(--text-sm);
     font-weight: 700;
@@ -141,75 +158,118 @@ const isCalendlyLive = true;
     margin-bottom: var(--space-sm);
   }
 
-  .booking-fallback {
-    max-width: var(--max-width-narrow);
-    margin: 0 auto;
+  /* CATEGORY HEADER */
+  .booking-category__header {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border);
   }
+  .booking-category__header h2 {
+    margin-bottom: var(--space-xs);
+  }
+
+  /* BOOKING GRID */
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  @media (min-width: 600px) {
+    .booking-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1000px) {
+    .booking-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* BOOKING CARD */
   .booking-card {
-    text-align: center;
-    padding: var(--space-3xl);
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
     border-radius: var(--border-radius-lg);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
   }
-  .booking-card h2 {
+  .booking-card:hover {
+    box-shadow: 0 8px 32px rgba(44, 40, 37, 0.1);
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+
+  .booking-card__body {
+    padding: var(--space-xl) var(--space-xl) var(--space-md);
+    flex: 1;
+  }
+
+  .booking-card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: var(--space-md);
   }
-  .booking-card p {
+  .booking-card__duration {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: var(--text-secondary);
-    max-width: 480px;
-    margin: 0 auto var(--space-xl);
   }
-  .booking-card__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md);
+  .booking-card__price {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    font-family: var(--font-serif);
+    color: var(--accent);
+  }
+
+  .booking-card__name {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    line-height: 1.3;
+  }
+
+  .booking-card__desc {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .booking-card__footer {
+    padding: var(--space-md) var(--space-xl) var(--space-xl);
+  }
+  .booking-card__btn {
+    width: 100%;
     justify-content: center;
   }
 
-  .services-menu {
-    display: grid;
-    gap: 0;
-  }
-  .services-menu__item {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-md);
-    padding: var(--space-md) 0;
+  /* PHONE CTA */
+  .phone-cta {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
+    padding: var(--space-xl) 0;
+    text-align: center;
   }
-  .services-menu__item:last-child {
-    border-bottom: none;
-  }
-  .services-menu__info {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-sm);
-    flex: 1;
-    min-width: 0;
-  }
-  .services-menu__name {
-    font-weight: 600;
-    white-space: nowrap;
-    font-size: var(--text-sm);
-  }
-  .services-menu__dots {
-    flex: 1;
-    border-bottom: 2px dotted var(--border);
-    min-width: 20px;
-    align-self: center;
-    margin-bottom: 4px;
-  }
-  .services-menu__price {
-    font-weight: 700;
-    color: var(--accent);
-    white-space: nowrap;
-    font-size: var(--text-sm);
-  }
-  .services-menu__duration {
-    font-size: var(--text-xs);
+  .phone-cta p {
+    font-size: var(--text-lg);
     color: var(--text-secondary);
-    white-space: nowrap;
+  }
+  .phone-cta__link {
+    font-weight: 700;
+    font-family: var(--font-serif);
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition-fast);
+  }
+  .phone-cta__link:hover {
+    color: var(--accent);
+  }
+
+  /* INFO SECTION */
+  .info-section__heading {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
   }
 
   .info-grid {
@@ -220,6 +280,7 @@ const isCalendlyLive = true;
   @media (max-width: 768px) {
     .info-grid { grid-template-columns: 1fr; }
   }
+
   .info-card {
     background: var(--bg-primary);
     border: 1px solid var(--border);

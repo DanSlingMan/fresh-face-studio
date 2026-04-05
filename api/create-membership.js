@@ -1,9 +1,18 @@
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { tier } = req.body;
+  if (!process.env.STRIPE_SECRET_KEY) {
+    console.error('Stripe error: STRIPE_SECRET_KEY env var is not set');
+    return res.status(500).json({ error: 'Server is missing Stripe configuration' });
+  }
+
+  const { tier } = req.body || {};
 
   const tiers = {
     member: {
@@ -29,8 +38,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       payment_method_types: ['card'],
@@ -54,7 +61,17 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ url: session.url });
   } catch (error) {
-    console.error('Stripe error:', error);
-    return res.status(500).json({ error: 'Failed to create checkout session' });
+    console.error('Stripe checkout session error:', {
+      message: error?.message,
+      type: error?.type,
+      code: error?.code,
+      statusCode: error?.statusCode,
+      requestId: error?.requestId,
+      stack: error?.stack,
+    });
+    return res.status(500).json({
+      error: 'Failed to create checkout session',
+      detail: error?.message,
+    });
   }
 }

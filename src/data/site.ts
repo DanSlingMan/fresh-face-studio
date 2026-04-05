@@ -34,11 +34,11 @@ export const business = {
     sunday: 'Closed',
   },
   booking: {
-    url: 'https://freshfacestudio.glossgenius.com/book',
-    platform: 'GlossGenius',
+    url: 'https://calendly.com/freshface-sc',
+    platform: 'Calendly',
   },
   social: {
-    instagram: '', // TODO: Add Instagram handle
+    instagram: 'https://www.instagram.com/freshface.studio/',
     facebook: '', // TODO: Add Facebook URL
     tiktok: '',   // TODO: Add TikTok handle
   },

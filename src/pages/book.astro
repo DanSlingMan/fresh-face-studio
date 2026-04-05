@@ -4,8 +4,8 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { business, services } from '../data/site';
 
-const calendlyUrl = 'https://calendly.com/REPLACE-WITH-REAL-URL';
-const isCalendlyLive = !calendlyUrl.includes('REPLACE');
+const calendlyUrl = 'https://calendly.com/freshface-sc';
+const isCalendlyLive = true;
 ---
 
 <BaseLayout
@@ -14,61 +14,48 @@ const isCalendlyLive = !calendlyUrl.includes('REPLACE');
 >
   <Header slot="header" currentPath="/book" />
 
-  <section class="page-hero">
-    <div class="container container--narrow">
+  <!-- HERO -->
+  <section class="page-hero-img" aria-label="Book an appointment">
+    <img
+      src="/images/facial-relaxed.jpg"
+      alt="Client relaxing during a facial treatment at Fresh Face Studio"
+      class="page-hero-img__bg"
+      loading="eager"
+    />
+    <div class="page-hero-img__content">
+      <p class="book-eyebrow">Schedule Your Visit</p>
       <h1>Book an Appointment</h1>
       <p>
-        Ready to invest in your skin? Choose a service and time that works for you.
-        Every treatment is customized to your skin when you arrive.
+        Pick a service, pick a time, and leave the rest to Maria. Every treatment is
+        customized the moment she sees your skin.
       </p>
     </div>
   </section>
 
+  <!-- BOOKING SECTION -->
   <section class="section">
     <div class="container">
       {isCalendlyLive ? (
-        <!-- Calendly inline widget -->
-        <div
-          class="calendly-inline-widget"
-          data-url={calendlyUrl}
-          style="min-width:320px;height:700px;"
-        ></div>
-        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+        <Fragment>
+          <div
+            class="calendly-inline-widget"
+            data-url={`${calendlyUrl}?hide_gdpr_banner=1&primary_color=c17b5a`}
+            style="min-width:320px;height:700px;"
+          ></div>
+          <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+          <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+        </Fragment>
       ) : (
-        <!-- Fallback: GlossGenius booking + services grid -->
         <div class="booking-fallback">
           <div class="booking-card">
             <h2>Online Booking Coming Soon</h2>
             <p>
-              We're setting up online scheduling. In the meantime, book through
-              GlossGenius or give us a call.
+              We're setting up online scheduling. In the meantime, give us a call.
             </p>
             <div class="booking-card__actions">
-              <a href={business.booking.url} class="btn btn--primary" target="_blank" rel="noopener">
-                Book on GlossGenius
-              </a>
-              <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`} class="btn btn--secondary">
+              <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`} class="btn btn--primary btn--lg">
                 Call {business.phone}
               </a>
-            </div>
-          </div>
-
-          <div class="services-menu">
-            <h3>Our Services & Pricing</h3>
-            <div class="services-menu__grid">
-              {services.map(service => (
-                <div class="services-menu__item">
-                  <div class="services-menu__info">
-                    <span class="services-menu__name">{service.name}</span>
-                    <span class="services-menu__dots"></span>
-                    <span class="services-menu__price">
-                      {'priceNote' in service ? `${(service as any).priceNote} ` : ''}${service.price}
-                    </span>
-                  </div>
-                  <span class="services-menu__duration">{service.duration} min</span>
-                </div>
-              ))}
             </div>
           </div>
         </div>
@@ -76,10 +63,33 @@ const isCalendlyLive = !calendlyUrl.includes('REPLACE');
     </div>
   </section>
 
+  <!-- SERVICES PRICING LIST -->
   <section class="section section--alt">
+    <div class="container container--narrow">
+      <h2 style="text-align:center; margin-bottom:var(--space-xl);">Services &amp; Pricing</h2>
+      <div class="services-menu">
+        {services.map(service => (
+          <div class="services-menu__item">
+            <div class="services-menu__info">
+              <span class="services-menu__name">{service.name}</span>
+              <span class="services-menu__dots"></span>
+              <span class="services-menu__price">
+                {'priceNote' in service ? `${(service as any).priceNote} ` : ''}${service.price}
+              </span>
+            </div>
+            <span class="services-menu__duration">{service.duration} min</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO CARDS -->
+  <section class="section">
     <div class="container">
       <div class="info-grid">
         <div class="info-card">
+          <div class="info-card__icon" aria-hidden="true">✦</div>
           <h3>Before Your Visit</h3>
           <p>
             Arrive with a clean face if possible. Let us know about any medications,
@@ -88,6 +98,7 @@ const isCalendlyLive = !calendlyUrl.includes('REPLACE');
           </p>
         </div>
         <div class="info-card">
+          <div class="info-card__icon" aria-hidden="true">✦</div>
           <h3>Cancellation Policy</h3>
           <p>
             We understand plans change. Cancellations within 24 hours of your
@@ -96,6 +107,7 @@ const isCalendlyLive = !calendlyUrl.includes('REPLACE');
           </p>
         </div>
         <div class="info-card">
+          <div class="info-card__icon" aria-hidden="true">✦</div>
           <h3>House Calls</h3>
           <p>
             Can't make it to the studio? We offer house calls for select treatments
@@ -104,6 +116,7 @@ const isCalendlyLive = !calendlyUrl.includes('REPLACE');
           </p>
         </div>
         <div class="info-card">
+          <div class="info-card__icon" aria-hidden="true">✦</div>
           <h3>Not Sure What You Need?</h3>
           <p>
             No problem. Book a Classic Facial and we'll assess your skin during
@@ -119,28 +132,24 @@ const isCalendlyLive = !calendlyUrl.includes('REPLACE');
 </BaseLayout>
 
 <style>
-  .page-hero {
-    padding: var(--space-3xl) 0 var(--space-xl);
-    text-align: center;
-  }
-  .page-hero p {
-    color: var(--text-secondary);
-    font-size: var(--text-lg);
-    max-width: 550px;
-    margin: 0 auto;
+  .book-eyebrow {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-sm);
   }
 
   .booking-fallback {
     max-width: var(--max-width-narrow);
     margin: 0 auto;
   }
-
   .booking-card {
     text-align: center;
-    padding: var(--space-2xl);
+    padding: var(--space-3xl);
     background: var(--bg-secondary);
     border-radius: var(--border-radius-lg);
-    margin-bottom: var(--space-3xl);
   }
   .booking-card h2 {
     margin-bottom: var(--space-md);
@@ -157,13 +166,9 @@ const isCalendlyLive = !calendlyUrl.includes('REPLACE');
     justify-content: center;
   }
 
-  .services-menu h3 {
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
-  .services-menu__grid {
+  .services-menu {
     display: grid;
-    gap: var(--space-md);
+    gap: 0;
   }
   .services-menu__item {
     display: flex;
@@ -186,6 +191,7 @@ const isCalendlyLive = !calendlyUrl.includes('REPLACE');
   .services-menu__name {
     font-weight: 600;
     white-space: nowrap;
+    font-size: var(--text-sm);
   }
   .services-menu__dots {
     flex: 1;
@@ -198,9 +204,10 @@ const isCalendlyLive = !calendlyUrl.includes('REPLACE');
     font-weight: 700;
     color: var(--accent);
     white-space: nowrap;
+    font-size: var(--text-sm);
   }
   .services-menu__duration {
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     color: var(--text-secondary);
     white-space: nowrap;
   }
@@ -208,19 +215,21 @@ const isCalendlyLive = !calendlyUrl.includes('REPLACE');
   .info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-xl);
+    gap: var(--space-lg);
   }
   @media (max-width: 768px) {
-    .info-grid {
-      grid-template-columns: 1fr;
-    }
+    .info-grid { grid-template-columns: 1fr; }
   }
-
   .info-card {
     background: var(--bg-primary);
     border: 1px solid var(--border);
     border-radius: var(--border-radius-lg);
     padding: var(--space-xl);
+  }
+  .info-card__icon {
+    font-size: var(--text-lg);
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
   }
   .info-card h3 {
     font-size: var(--text-xl);

@@ -15,8 +15,16 @@ const posts = (await getCollection('blog')).sort(
 >
   <Header slot="header" currentPath="/blog" />
 
-  <section class="page-hero">
-    <div class="container container--narrow">
+  <!-- HERO -->
+  <section class="page-hero-img" aria-label="Skin School blog">
+    <img
+      src="/images/eye-treatment.jpg"
+      alt="Eye area skincare treatment at Fresh Face Studio"
+      class="page-hero-img__bg"
+      loading="eager"
+    />
+    <div class="page-hero-img__content">
+      <p class="blog-eyebrow">Education &amp; Expertise</p>
       <h1>Skin School</h1>
       <p>
         Honest skincare education from a licensed esthetician. No sponsored content.
@@ -25,6 +33,7 @@ const posts = (await getCollection('blog')).sort(
     </div>
   </section>
 
+  <!-- POSTS -->
   <section class="section">
     <div class="container container--narrow">
       {posts.length > 0 ? (
@@ -69,6 +78,7 @@ const posts = (await getCollection('blog')).sort(
             skincare ingredient breakdowns, seasonal routine adjustments for beach living,
             and myth-busting the most common skincare advice.
           </p>
+          <a href="/book" class="btn btn--primary" style="margin-top:var(--space-xl);">Book a Consultation</a>
         </div>
       )}
     </div>
@@ -78,15 +88,13 @@ const posts = (await getCollection('blog')).sort(
 </BaseLayout>
 
 <style>
-  .page-hero {
-    padding: var(--space-3xl) 0 var(--space-xl);
-    text-align: center;
-  }
-  .page-hero p {
-    color: var(--text-secondary);
-    font-size: var(--text-lg);
-    max-width: 550px;
-    margin: 0 auto;
+  .blog-eyebrow {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-sm);
   }
 
   .blog-grid {
@@ -100,10 +108,11 @@ const posts = (await getCollection('blog')).sort(
     border: 1px solid var(--border);
     border-radius: var(--border-radius-lg);
     text-decoration: none;
-    transition: box-shadow var(--transition-base);
+    transition: box-shadow var(--transition-base), border-color var(--transition-base);
   }
   .blog-card:hover {
     box-shadow: 0 4px 24px rgba(44, 40, 37, 0.08);
+    border-color: var(--accent);
   }
 
   .blog-card__body {

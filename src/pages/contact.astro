@@ -13,21 +13,32 @@ const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURICompo
 >
   <Header slot="header" currentPath="/contact" />
 
-  <section class="page-hero">
-    <div class="container container--narrow">
+  <!-- HERO -->
+  <section class="page-hero-img" aria-label="Contact Fresh Face Studio">
+    <img
+      src="/images/steamer-treatment.jpg"
+      alt="Steamer treatment being used in the Fresh Face Studio"
+      class="page-hero-img__bg"
+      loading="eager"
+    />
+    <div class="page-hero-img__content">
+      <p class="contact-eyebrow">We'd Love to Hear From You</p>
       <h1>Get In Touch</h1>
-      <p>We'd love to hear from you. Book online, give us a call, or stop by the bungalow.</p>
+      <p>Book online, give us a call, or stop by the bungalow.</p>
     </div>
   </section>
 
-  <section class="section">
+  <!-- CONTACT INFO -->
+  <section class="section" aria-labelledby="contact-heading">
     <div class="container">
       <div class="contact-grid">
         <div class="contact-info">
+          <h2 id="contact-heading" style="margin-bottom:var(--space-2xl);">Find Us</h2>
+
           <div class="contact-block">
             <h3>Visit the Studio</h3>
             <p>
-              <a href={mapUrl} target="_blank" rel="noopener">
+              <a href={mapUrl} target="_blank" rel="noopener" class="contact-address">
                 {business.address.street}<br />
                 {business.address.city}, {business.address.state} {business.address.zip}
               </a>
@@ -49,52 +60,76 @@ const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURICompo
           </div>
 
           <div class="contact-block">
-            <h3>Book Online</h3>
-            <p>
-              <a href={business.booking.url} target="_blank" rel="noopener" class="btn btn--primary">
-                Book Your Appointment
-              </a>
-            </p>
-          </div>
-
-          <div class="contact-block">
             <h3>House Calls</h3>
             <p>
               Can't make it to the studio? We offer house calls throughout the
               North Myrtle Beach and Myrtle Beach area. Call to arrange.
             </p>
           </div>
+
+          <a href="/book" class="btn btn--primary btn--lg" style="margin-top:var(--space-xl);">
+            Book Your Appointment
+          </a>
         </div>
 
         <div class="contact-map">
-          <!-- Static map placeholder — TODO: Replace with Google Maps embed or static map image -->
-          <div class="map-placeholder">
-            <a href={mapUrl} target="_blank" rel="noopener">
-              <span>View on Google Maps</span>
-            </a>
-          </div>
+          <a href={mapUrl} target="_blank" rel="noopener" class="map-link" aria-label="View Fresh Face Studio on Google Maps">
+            <div class="map-placeholder">
+              <div class="map-placeholder__inner">
+                <svg viewBox="0 0 24 24" fill="none" width="48" height="48" aria-hidden="true">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="var(--accent)" />
+                </svg>
+                <p>
+                  {business.address.street}<br />
+                  {business.address.city}, {business.address.state}
+                </p>
+                <span class="map-cta">View on Google Maps &rarr;</span>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- INSTAGRAM CTA -->
+  {business.social.instagram && (
+    <section class="section section--alt">
+      <div class="container container--narrow" style="text-align:center;">
+        <h2 style="margin-bottom:var(--space-md);">Follow Along</h2>
+        <p class="text-secondary" style="margin-bottom:var(--space-xl);">
+          See treatment results, skincare tips, and bungalow life on Instagram.
+        </p>
+        <a
+          href={business.social.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--secondary"
+        >
+          @freshface.studio
+        </a>
+      </div>
+    </section>
+  )}
+
   <Footer slot="footer" />
 </BaseLayout>
 
 <style>
-  .page-hero {
-    padding: var(--space-3xl) 0 var(--space-xl);
-    text-align: center;
-  }
-  .page-hero p {
-    color: var(--text-secondary);
-    font-size: var(--text-lg);
+  .contact-eyebrow {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-sm);
   }
 
   .contact-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-2xl);
+    gap: var(--space-3xl);
+    align-items: start;
   }
   @media (min-width: 768px) {
     .contact-grid { grid-template-columns: 1fr 1fr; }
@@ -104,34 +139,76 @@ const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURICompo
     margin-bottom: var(--space-xl);
   }
   .contact-block h3 {
-    font-size: var(--text-lg);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
     margin-bottom: var(--space-sm);
+    font-family: var(--font-sans);
   }
   .contact-block p {
     color: var(--text-secondary);
     line-height: 1.8;
+    font-size: var(--text-base);
   }
-  .contact-block a {
-    color: var(--accent);
+  .contact-address {
+    color: var(--text-secondary) !important;
+    line-height: 1.8;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .contact-address:hover {
+    color: var(--accent) !important;
   }
 
   .contact-phone {
-    font-size: var(--text-2xl);
+    font-size: var(--text-3xl);
     font-weight: 700;
     font-family: var(--font-serif);
+    color: var(--text-primary) !important;
+    text-decoration: none;
+    display: block;
+  }
+  .contact-phone:hover {
+    color: var(--accent) !important;
   }
 
+  .map-link {
+    display: block;
+    text-decoration: none;
+  }
   .map-placeholder {
-    aspect-ratio: 1;
-    background: var(--bg-secondary);
     border-radius: var(--border-radius-lg);
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    min-height: 340px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px dashed var(--border);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
   }
-  .map-placeholder a {
+  .map-link:hover .map-placeholder {
+    border-color: var(--accent);
+    box-shadow: 0 4px 24px rgba(193,123,90,0.15);
+  }
+  .map-placeholder__inner {
+    text-align: center;
+    padding: var(--space-2xl);
+  }
+  .map-placeholder__inner svg {
+    margin: 0 auto var(--space-md);
+  }
+  .map-placeholder__inner p {
     color: var(--text-secondary);
     font-size: var(--text-sm);
+    line-height: 1.8;
+    margin-bottom: var(--space-md);
+  }
+  .map-cta {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.04em;
   }
 </style>

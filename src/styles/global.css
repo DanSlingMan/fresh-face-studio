@@ -13,19 +13,19 @@
 /* ===== CUSTOM PROPERTIES ===== */
 :root {
   /* Brand palette */
-  --color-cream: #FAF7F2;
-  --color-sand: #F0EBE1;
-  --color-warm-white: #FFFDF9;
-  --color-sage: #7A8B6F;
-  --color-sage-light: #E8EDE5;
-  --color-sage-dark: #5A6B4F;
-  --color-terracotta: #C17B5A;
-  --color-terracotta-light: #F5E6DC;
-  --color-charcoal: #2C2825;
-  --color-dark: #1a1a1a;
-  --color-warm-gray: #6B6560;
-  --color-warm-gray-light: #A09A94;
-  --color-border: #E0D9CF;
+  --color-cream: #F7F3EE;
+  --color-sand: #EDE7DF;
+  --color-warm-white: #FDFBF8;
+  --color-sage: #8B9E87;
+  --color-sage-light: #E8EDDF;
+  --color-sage-dark: #6B7F67;
+  --color-terracotta: #B8907A;
+  --color-terracotta-light: #F0E4DC;
+  --color-charcoal: #2D2926;
+  --color-dark: #2D2926;
+  --color-warm-gray: #7A7471;
+  --color-warm-gray-light: #A69E9A;
+  --color-border: #DDD6CD;
 
   /* Semantic tokens */
   --bg-primary: var(--color-warm-white);
@@ -35,7 +35,7 @@
   --text-secondary: var(--color-warm-gray);
   --text-accent: var(--color-sage-dark);
   --accent: var(--color-terracotta);
-  --accent-hover: #A8674A;
+  --accent-hover: #9E7A65;
   --border: var(--color-border);
 
   /* Typography scale */

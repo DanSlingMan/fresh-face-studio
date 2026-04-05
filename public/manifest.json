@@ -1,0 +1,9 @@
+{
+  "name": "Fresh Face Studio",
+  "short_name": "Fresh Face",
+  "description": "Personalized skincare studio in North Myrtle Beach, SC",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFBF8",
+  "theme_color": "#2D2926"
+}

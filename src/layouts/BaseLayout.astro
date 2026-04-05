@@ -55,6 +55,10 @@ const localBusinessSchema = {
   ],
   priceRange: '$$',
   image: 'https://yourfreshface.com/og-default.jpg',
+  hasMap: 'https://www.google.com/maps/search/?api=1&query=Fresh+Face+Studio+North+Myrtle+Beach+SC',
+  areaServed: ['North Myrtle Beach', 'Myrtle Beach', 'Little River', 'Conway', 'Surfside Beach', 'Garden City', "Murrell's Inlet", 'Pawleys Island'],
+  paymentAccepted: 'Cash, Credit Card',
+  currenciesAccepted: 'USD',
   sameAs: [
     business.social.instagram,
     business.social.facebook,
@@ -95,6 +99,11 @@ const localBusinessSchema = {
   <meta name="geo.position" content={`${business.coordinates.lat};${business.coordinates.lng}`} />
   <meta name="ICBM" content={`${business.coordinates.lat}, ${business.coordinates.lng}`} />
 
+  <!-- Theme & manifest -->
+  <meta name="theme-color" content="#2D2926" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="sitemap" href="/sitemap.xml" />
+
   <!-- Favicon — TODO: Replace with actual brand favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -113,7 +122,7 @@ const localBusinessSchema = {
 
   <slot name="header" />
 
-  <main id="main-content">
+  <main id="main-content" aria-label="Main content">
     <slot />
   </main>
 

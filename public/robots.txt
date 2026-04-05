@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://freshfacestudio.com/sitemap-index.xml
+Sitemap: https://yourfreshface.com/sitemap.xml

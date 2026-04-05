@@ -60,6 +60,8 @@ import { business } from '../data/site';
       </p>
       <p class="footer-bottom__studio">
         <a href="/studio" class="footer-studio-link">Content Studio</a>
+        <span class="footer-studio-sep" aria-hidden="true">·</span>
+        <a href="/notes" class="footer-studio-link">Client Notes</a>
       </p>
     </div>
   </div>
@@ -178,5 +180,10 @@ import { business } from '../data/site';
   }
   .footer-studio-link:hover {
     color: var(--color-warm-gray-light);
+  }
+  .footer-studio-sep {
+    color: rgba(166, 158, 154, 0.3);
+    margin: 0 0.5rem;
+    font-size: 0.6875rem;
   }
 </style>

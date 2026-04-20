@@ -1,11 +1,16 @@
 /**
  * Fresh Face Studio — Site Data
- * 
+ *
  * Single source of truth for all business information.
  * Update here, changes reflect everywhere on the site.
  * Maria & Brett never touch code — this is the one file
  * a developer updates when business details change.
  */
+
+export const GLOSSGENIUS_URLS = {
+  booking: 'https://freshfacestudio.glossgenius.com/',
+  memberships: 'https://freshfacestudio.glossgenius.com/shop/memberships?tab=explore',
+};
 
 export const business = {
   name: 'Fresh Face Studio',
@@ -34,8 +39,8 @@ export const business = {
     sunday: 'Closed',
   },
   booking: {
-    url: 'https://calendly.com/freshface-sc',
-    platform: 'Calendly',
+    url: GLOSSGENIUS_URLS.booking,
+    platform: 'GlossGenius',
   },
   social: {
     instagram: 'https://www.instagram.com/freshface.studio/',

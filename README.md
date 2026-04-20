@@ -2,9 +2,9 @@
 
 Astro static site for Fresh Face Studio, a boutique skincare studio in North Myrtle Beach, SC.
 
-**Stack:** Astro (SSG) · Netlify · Zero JavaScript frameworks  
-**Hosting:** Netlify (free tier)  
-**Booking:** GlossGenius (embedded via link, kept as booking/payment backend)
+**Stack:** Astro (SSG) · Vercel · Zero JavaScript frameworks  
+**Hosting:** Vercel (auto-deploys from `master`)  
+**Booking / Payments / Memberships / Client Notes / Products:** GlossGenius (external — linked to via `GLOSSGENIUS_URLS` in `src/data/site.ts`)
 
 ---
 
@@ -55,7 +55,6 @@ fresh-face-studio/
 │   └── styles/
 │       └── global.css        # Design system & brand tokens
 ├── astro.config.mjs
-├── netlify.toml              # Netlify build + redirect config
 ├── package.json
 └── tsconfig.json
 ```
@@ -75,20 +74,14 @@ When Maria changes her hours or adds a service, update this one file. The entire
 - Proper heading hierarchy throughout
 
 ### GlossGenius Integration
-GlossGenius stays as the booking/payment backend. Every "Book Now" button links to the GlossGenius booking page. The `netlify.toml` includes a `/book` redirect for clean URLs. When/if they switch booking platforms, update `business.booking.url` in `site.ts`.
+GlossGenius permanently handles booking, payments, memberships, client notes, and products. Canonical external URLs live in `GLOSSGENIUS_URLS` in `src/data/site.ts` — update that one constant if the URL structure ever changes. CTAs that leave the site for GlossGenius open in a new tab (`target="_blank"`).
 
 ### Blog (Skin School)
 Markdown files in `src/content/blog/`. Each post uses the `BlogPost.astro` layout which auto-generates article structured data, renders prose with styled typography, and includes a booking CTA at the bottom.
 
-## Deployment (Netlify)
+## Deployment (Vercel)
 
-1. Push repo to GitHub
-2. Connect repo to Netlify
-3. Netlify auto-detects Astro — build command and publish dir are in `netlify.toml`
-4. Set custom domain: `freshfacestudio.com`
-5. Netlify handles SSL automatically
-
-Every push to `main` triggers a new deploy. Branch deploys work for previewing changes.
+Auto-deploys to production on every push to `master`. Branch pushes create preview deployments. Framework preset is Astro; no custom build config needed.
 
 ## TODO Before Launch
 

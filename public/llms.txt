@@ -1,0 +1,24 @@
+# Fresh Face Studio
+
+> Boutique skincare studio in North Myrtle Beach, SC. Personalized facials, chemical peels, microneedling, and advanced skin treatments in a renovated 1950s beach bungalow. Owner and licensed esthetician Maria Conover.
+
+## About
+- [About Fresh Face Studio](https://yourfreshface.com/about): Our story, the bungalow, and what makes Fresh Face different. Boutique one-on-one skincare experience in North Myrtle Beach.
+
+## Services
+- [All Services & Pricing](https://yourfreshface.com/services): Complete service menu including Classic Facials ($90), Custom Facials ($140), Chemical Peels ($130), Microneedling ($250+), Nanoneedling LuminFusion ($150), Dermaplaning ($50), Lash Lifts, Brow Services, and Waxing.
+- [Book an Appointment](https://yourfreshface.com/book): Online booking with service selection and pricing. Serving North Myrtle Beach, Myrtle Beach, Little River, Conway, Surfside Beach, and the Grand Strand.
+
+## Membership
+- [Membership Plans](https://yourfreshface.com/membership): Three membership tiers — Member ($89/mo), VIP ($139/mo), Luxe ($199/mo) — with monthly facials, loyalty points, discounts, and exclusive perks.
+
+## Skin School (Blog)
+- [Skin School](https://yourfreshface.com/blog): Expert skincare education from a licensed esthetician. Tips for coastal living, treatment guides, ingredient breakdowns, and myth-busting.
+- [Chemical Peel vs. Microneedling](https://yourfreshface.com/blog/chemical-peel-vs-microneedling): Honest comparison of two popular advanced treatments — what each does, who they're best for, and how to choose.
+- [Best Facial in North Myrtle Beach](https://yourfreshface.com/blog/best-facial-north-myrtle-beach): What to look for when choosing an esthetician, red flags, and green flags.
+- [Skincare Routine for Beach Living](https://yourfreshface.com/blog/skincare-routine-beach-living-sc): How coastal SC climate affects your skin and how to adjust your routine.
+- [What to Expect at Your First Facial](https://yourfreshface.com/blog/what-to-expect-first-facial): Step-by-step guide for first-timers — what happens, does it hurt, how to prepare.
+- [Dermaplaning Myths vs Facts](https://yourfreshface.com/blog/dermaplaning-myths-facts): Licensed esthetician debunks common misconceptions about dermaplaning.
+
+## Contact
+- [Contact & Location](https://yourfreshface.com/contact): 1626 Hwy 17 S Suite F, North Myrtle Beach, SC 29582. Phone: (843) 457-2448. Mon-Sat 9AM-5PM. House calls available.

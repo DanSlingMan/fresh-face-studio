@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://yourfreshface.com/sitemap.xml
+
+# AI Discovery
+Allow: /llms.txt

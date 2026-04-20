@@ -8,7 +8,7 @@
  */
 
 export const GLOSSGENIUS_URLS = {
-  booking: 'https://freshfacestudio.glossgenius.com/',
+  booking: 'https://freshfacestudio.glossgenius.com/services',
   memberships: 'https://freshfacestudio.glossgenius.com/shop/memberships?tab=explore',
 };
 

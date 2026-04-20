@@ -2,13 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { business, services, serviceCategories } from '../data/site';
-
-const baseCalendlyUrl = 'https://calendly.com/freshface-sc';
-
-function calendlyLink(slug: string): string {
-  return `${baseCalendlyUrl}/${slug}`;
-}
+import { business, services, serviceCategories, GLOSSGENIUS_URLS } from '../data/site';
 
 function truncate(text: string, max: number): string {
   return text.length <= max ? text : text.slice(0, max).trimEnd() + '…';
@@ -70,11 +64,11 @@ function truncate(text: string, max: number): string {
                 </div>
                 <div class="booking-card__footer">
                   <a
-                    href={calendlyLink(service.slug)}
+                    href={GLOSSGENIUS_URLS.booking}
                     class="btn btn--primary booking-card__btn"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Book ${service.name} on Calendly`}
+                    aria-label={`Book ${service.name} on GlossGenius`}
                   >
                     Book Now
                   </a>

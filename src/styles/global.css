@@ -27,6 +27,11 @@
   --color-warm-gray-light: #A69E9A;
   --color-border: #DDD6CD;
 
+  /* GlossGenius handoff gradient — used on primary "Book" CTAs that
+     hand off to GlossGenius. Visual continuity at the moment of handoff. */
+  --color-gg-gradient: linear-gradient(to right, #DF7D65, #DDBEE3);
+  --color-gg-gradient-vertical: linear-gradient(to bottom, #DF7D65, #DDBEE3);
+
   /* Semantic tokens */
   --bg-primary: var(--color-warm-white);
   --bg-secondary: var(--color-cream);
@@ -230,6 +235,26 @@ p + p { margin-top: var(--space-md); }
   background-color: white;
   color: var(--color-charcoal);
   transform: translateY(-1px);
+}
+
+/* GlossGenius handoff CTA — coral→lavender gradient.
+   Apply alongside .btn--primary on Book CTAs that lead to GlossGenius
+   (directly or via the /book on-ramp). Text-shadow boosts legibility on
+   the lighter lavender end where white text contrast drops. */
+.btn--gg {
+  background: var(--color-gg-gradient);
+  background-color: #DF7D65; /* fallback for browsers without gradient support */
+  color: white;
+  border-color: transparent;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+.btn--gg:hover {
+  background: var(--color-gg-gradient);
+  filter: brightness(0.92);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(180, 130, 165, 0.35);
 }
 
 .btn--sage {

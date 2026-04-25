@@ -10,6 +10,7 @@
 export const GLOSSGENIUS_URLS = {
   booking: 'https://freshfacestudio.glossgenius.com/services',
   memberships: 'https://freshfacestudio.glossgenius.com/shop/memberships?tab=explore',
+  giftCards: 'https://freshfacestudio.glossgenius.com/shop/gift-cards',
 };
 
 export const business = {

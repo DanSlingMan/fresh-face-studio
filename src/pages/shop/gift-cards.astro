@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { GLOSSGENIUS_URLS } from '../../data/site';
+
+const standardAmounts = ['$50', '$75', '$100', '$200'];
+const designs = [
+  'With Love',
+  'Thinking of You',
+  'Thank You',
+  'Just Because',
+  'Happy Birthday',
+];
+---
+
+<!--
+  PROVISIONAL DESIGN — uses current Astro design system.
+  Will be reskinned as part of the full GlossGenius visual clone redesign.
+  Content and structure are accurate; visual treatment is temporary.
+-->
+<BaseLayout
+  title="Gift Cards"
+  description="Send a Fresh Face Studio gift card in any amount — $50, $75, $100, $200, or custom. Pick a design, write a note, and schedule the delivery date."
+>
+  <Header slot="header" currentPath="/shop" />
+
+  <!-- HERO -->
+  <section class="shop-hero">
+    <div class="container container--narrow shop-hero__inner">
+      <p class="shop-eyebrow">The Gift They'll Actually Use</p>
+      <h1>Send a Little Glow</h1>
+      <p class="shop-hero__lede">
+        A Fresh Face gift card is a permission slip — to slow down, get pampered, leave
+        with a friend.
+      </p>
+    </div>
+  </section>
+
+  <!-- AMOUNTS -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="gift-block">
+        <p class="shop-eyebrow">Pick an Amount</p>
+        <div class="gift-amounts">
+          {standardAmounts.map(amt => (
+            <span class="gift-chip">{amt}</span>
+          ))}
+          <span class="gift-chip gift-chip--custom">Or custom</span>
+        </div>
+        <p class="text-secondary" style="margin-top:var(--space-md);">
+          Cards work toward any service in the studio — facials, peels, microneedling,
+          dermaplaning, lash and brow work. Whatever they want.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGNS -->
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <p class="shop-eyebrow">Pick a Design</p>
+      <h2 style="margin-bottom:var(--space-lg);">Match the Moment</h2>
+      <p class="text-secondary text-lg" style="margin-bottom:var(--space-lg);">
+        A few designs to choose from depending on what you're saying — or who you're
+        saying it to.
+      </p>
+      <ul class="design-list">
+        {designs.map(d => <li>{d}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- DELIVERY -->
+  <section class="section">
+    <div class="container container--narrow">
+      <p class="shop-eyebrow">When &amp; How</p>
+      <h2 style="margin-bottom:var(--space-lg);">Schedule the Delivery</h2>
+      <p class="text-secondary text-lg">
+        Add a personal message and pick the date the card lands in their inbox. Buy it
+        today, deliver it on their birthday. Or right now — your call.
+      </p>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="section section--charcoal">
+    <div class="container container--narrow" style="text-align:center;">
+      <p class="section-header__eyebrow" style="color:var(--color-terracotta);">Ready to Send</p>
+      <h2 style="color:white; margin-bottom:var(--space-md);">Send a Gift Card</h2>
+      <p style="color:rgba(255,255,255,0.8); margin-bottom:var(--space-xl); max-width:520px; margin-left:auto; margin-right:auto;">
+        Gift cards are issued and delivered through GlossGenius. Pick the amount, the
+        design, and the day — they take care of the rest.
+      </p>
+      <a
+        href={GLOSSGENIUS_URLS.giftCards}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--primary btn--lg"
+      >
+        Send a Gift Card
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .shop-eyebrow {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-sm);
+  }
+
+  .shop-hero {
+    background: var(--bg-secondary);
+    padding: var(--space-4xl) 0 var(--space-3xl);
+    text-align: center;
+  }
+  .shop-hero__inner h1 {
+    margin-bottom: var(--space-md);
+  }
+  .shop-hero__lede {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 38rem;
+    margin: 0 auto;
+  }
+
+  .gift-block {
+    text-align: center;
+  }
+  .gift-amounts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+  .gift-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 5rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--color-terracotta);
+  }
+  .gift-chip--custom {
+    background: var(--color-sage-light);
+    color: var(--color-sage-dark);
+    border-color: var(--color-sage-light);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--font-sans);
+    font-weight: 700;
+  }
+
+  .design-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+  .design-list li {
+    padding: 0.625rem 1.125rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+  }
+</style>

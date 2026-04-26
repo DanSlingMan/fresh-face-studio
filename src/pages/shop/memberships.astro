@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { GLOSSGENIUS_URLS } from '../../data/site';
+---
+
+<!--
+  PROVISIONAL DESIGN — uses current Astro design system.
+  Will be reskinned as part of the full GlossGenius visual clone redesign.
+  Content and structure are accurate; visual treatment is temporary.
+-->
+<BaseLayout
+  title="Skincare Membership"
+  description="The Fresh Face Membership: a Classic Facial plus Full-face Dermaplaning every month for $125. Save $15 monthly and make great skin a habit, not a treat."
+>
+  <Header slot="header" currentPath="/shop" />
+
+  <!-- HERO -->
+  <section class="shop-hero">
+    <div class="container container--narrow shop-hero__inner">
+      <p class="shop-eyebrow">Make It a Habit</p>
+      <h1>The Fresh Face Membership</h1>
+      <p class="shop-hero__lede">
+        Skin doesn't change in one visit. It changes when you keep showing up.
+      </p>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="member-card">
+        <div class="member-card__header">
+          <p class="member-card__eyebrow">Monthly Membership</p>
+          <h2 class="member-card__price">$125<span class="member-card__per">/month</span></h2>
+          <p class="member-card__save">Saves $15/month vs. à la carte</p>
+        </div>
+
+        <div class="member-card__divider" aria-hidden="true"></div>
+
+        <div class="member-card__body">
+          <p class="member-card__includes-label">Each month, you get:</p>
+          <ul class="member-card__list">
+            <li><strong>One Classic Facial</strong> — deep cleanse, exfoliation, extractions, and a customized mask</li>
+            <li><strong>One Full-face Dermaplaning</strong> — gentle exfoliation that removes dead skin and peach fuzz for an immediate glow</li>
+          </ul>
+          <p class="member-card__time">About two hours of care, every single month.</p>
+        </div>
+
+        <div class="member-card__cta">
+          <a
+            href={GLOSSGENIUS_URLS.memberships}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn--primary btn--lg"
+          >
+            Become a Member
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <p class="shop-eyebrow">Who It's For</p>
+      <h2 style="margin-bottom:var(--space-lg);">For the Person Who's Done Treating Skincare Like a Treat</h2>
+      <p class="text-secondary text-lg">
+        You already know that one good facial isn't going to solve your skin. It's the
+        showing-up that does. The membership is for clients ready to put skincare on the
+        same calendar shelf as the dentist or the gym — non-negotiable, scheduled,
+        normal. The savings are nice. The real value is the consistency.
+      </p>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="section section--charcoal">
+    <div class="container container--narrow" style="text-align:center;">
+      <p class="section-header__eyebrow" style="color:var(--color-terracotta);">Ready When You Are</p>
+      <h2 style="color:white; margin-bottom:var(--space-md);">Become a Member</h2>
+      <p style="color:rgba(255,255,255,0.8); margin-bottom:var(--space-xl); max-width:520px; margin-left:auto; margin-right:auto;">
+        Membership is managed through GlossGenius. Sign up, schedule your first month,
+        and we'll see you in the bungalow.
+      </p>
+      <a
+        href={GLOSSGENIUS_URLS.memberships}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--primary btn--lg"
+      >
+        Become a Member
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .shop-eyebrow {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-sm);
+  }
+
+  .shop-hero {
+    background: var(--bg-secondary);
+    padding: var(--space-4xl) 0 var(--space-3xl);
+    text-align: center;
+  }
+  .shop-hero__inner h1 {
+    margin-bottom: var(--space-md);
+  }
+  .shop-hero__lede {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 36rem;
+    margin: 0 auto;
+  }
+
+  .member-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-2xl);
+    box-shadow: 0 4px 20px rgba(44, 40, 37, 0.05);
+  }
+  .member-card__header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+  .member-card__eyebrow {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+  .member-card__price {
+    font-family: var(--font-serif);
+    font-size: var(--text-5xl);
+    font-weight: 600;
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-xs);
+    line-height: 1;
+  }
+  .member-card__per {
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+  .member-card__save {
+    font-size: var(--text-sm);
+    color: var(--color-sage-dark);
+    font-weight: 600;
+  }
+  .member-card__divider {
+    height: 1px;
+    background: var(--border);
+    margin: var(--space-xl) 0;
+  }
+  .member-card__includes-label {
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+  }
+  .member-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-lg);
+  }
+  .member-card__list li {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .member-card__list li:last-child { border-bottom: 0; }
+  .member-card__time {
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+  }
+  .member-card__cta {
+    text-align: center;
+  }
+</style>

@@ -24,7 +24,7 @@ A great esthetician Myrtle Beach or North Myrtle Beach should be able to answer 
 
 **She's honest, even when it's not what you want to hear.** Some clients come in hoping a single facial will fix years of sun damage. I'd rather set realistic expectations than take your money and leave you disappointed. An esthetician who overpromises is not your ally.
 
-**The space feels right.** You're about to close your eyes and let someone work on your face for an hour. You should feel completely at ease. At Fresh Face Studio, we're in a 1950s beach bungalow — it's cozy, it's quiet, it smells incredible, and there's exactly one client at a time. That's intentional.
+**The space feels right.** You're about to close your eyes and let someone work on your face for an hour. You should feel completely at ease. At Fresh Face Studio, we're in a renovated 1950s beach house — it's cozy, it's quiet, it smells incredible, and there's exactly one client at a time. That's intentional.
 
 ## The Red Flags: When to Walk Away
 

@@ -10,7 +10,7 @@ Okay loves, let's have a heart-to-heart about the one product that's non-negotia
 
 ## Why SPF is Your Skin's Best Friend
 
-Look, I've been doing facials in my little 1950s beach bungalow here in North Myrtle Beach for years, and let me tell you what I see: the difference between clients who use SPF daily and those who don't is *dramatic*. We're talking about the difference between skin that ages gracefully and skin that looks like it's been through a few too many Carolina summers without protection.
+Look, I've been doing facials in my little 1950s-era studio here in North Myrtle Beach for years, and let me tell you what I see: the difference between clients who use SPF daily and those who don't is *dramatic*. We're talking about the difference between skin that ages gracefully and skin that looks like it's been through a few too many Carolina summers without protection.
 
 Sun damage isn't just about those obvious dark spots (though those are annoying enough). It's about breaking down your collagen, creating fine lines, and literally accelerating the aging process. It's not just skincare prevention – it's soul care for your future self.
 

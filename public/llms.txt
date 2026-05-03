@@ -1,9 +1,9 @@
 # Fresh Face Studio
 
-> Boutique skincare studio in North Myrtle Beach, SC. Personalized facials, chemical peels, microneedling, and advanced skin treatments in a renovated 1950s beach bungalow. Owner and licensed esthetician Maria Conover.
+> Boutique skincare studio in North Myrtle Beach, SC. Personalized facials, chemical peels, microneedling, and advanced skin treatments in a renovated 1950s beach house. Owner and licensed esthetician Maria Conover.
 
 ## About
-- [About Fresh Face Studio](https://yourfreshface.com/about): Our story, the bungalow, and what makes Fresh Face different. Boutique one-on-one skincare experience in North Myrtle Beach.
+- [About Fresh Face Studio](https://yourfreshface.com/about): Our story, the space, and what makes Fresh Face different. Boutique one-on-one skincare experience in North Myrtle Beach.
 
 ## Services
 - [All Services & Pricing](https://yourfreshface.com/services): Complete service menu including Classic Facials ($90), Custom Facials ($140), Chemical Peels ($130), Microneedling ($250+), Nanoneedling LuminFusion ($150), Dermaplaning ($50), Lash Lifts, Brow Services, and Waxing.

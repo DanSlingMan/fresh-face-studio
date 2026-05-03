@@ -16,8 +16,8 @@ export const GLOSSGENIUS_URLS = {
 
 export const business = {
   name: 'Fresh Face Studio',
-  tagline: 'Personalized Skincare in a 1950s Beach Bungalow',
-  description: 'Fresh Face Studio is a boutique skincare studio in North Myrtle Beach, SC offering personalized facials, chemical peels, microneedling, and advanced skin treatments in a renovated 1950s beach bungalow.',
+  tagline: 'Personalized Skincare in a 1950s Beach House',
+  description: 'Fresh Face Studio is a boutique skincare studio in North Myrtle Beach, SC offering personalized facials, chemical peels, microneedling, and advanced skin treatments in a renovated 1950s beach house.',
   phone: '(843) 457-2448',
   email: '', // TODO: Add business email
   address: {

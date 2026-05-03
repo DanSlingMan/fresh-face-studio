@@ -45,7 +45,7 @@ Professional treatments are the heavy hitters, but your daily routine is where t
 
 ## It's Not Just Skincare, It's Soul Care
 
-Here in my little 1950s beach bungalow, I see women every day who think they're "too old" or it's "too late." Let me tell you something – it's never too late to fall in love with your skin again. Every line tells a story of laughter, every sun spot is proof of days well-lived, and every treatment we do together is about honoring that journey while helping you feel your absolute best.
+Here in my little 1950s-era space, I see women every day who think they're "too old" or it's "too late." Let me tell you something – it's never too late to fall in love with your skin again. Every line tells a story of laughter, every sun spot is proof of days well-lived, and every treatment we do together is about honoring that journey while helping you feel your absolute best.
 
 Your 40s and 50s aren't about fighting aging – they're about aging with intention, with care, and with someone who treats your face like the only one that matters.
 

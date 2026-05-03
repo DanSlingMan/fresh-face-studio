@@ -1,6 +1,6 @@
 ---
 title: "What I Wish Every Client Knew Before Their First Appointment"
-description: "Hey beautiful souls! 💕 After years of welcoming new faces into my little beach bungalow studio, I've noticed there are a few things that would make your"
+description: "Hey beautiful souls! 💕 After years of welcoming new faces into my little studio, I've noticed there are a few things that would make your"
 pubDate: 2026-04-05
 author: "Fresh Face Studio"
 tags: ["facials", "chemical peel", "microneedling", "skincare routine"]
@@ -8,7 +8,7 @@ tags: ["facials", "chemical peel", "microneedling", "skincare routine"]
 
 Hey beautiful souls! 💕
 
-After years of welcoming new faces into my little beach bungalow studio, I've noticed there are a few things that would make your experience even more amazing if you knew them beforehand. Think of this as your gentle prep guide from your skincare-obsessed friend (that's me!).
+After years of welcoming new faces into my little 1950s-era space, I've noticed there are a few things that would make your experience even more amazing if you knew them beforehand. Think of this as your gentle prep guide from your skincare-obsessed friend (that's me!).
 
 ## Come As You Are (But Maybe Skip the Makeup)
 

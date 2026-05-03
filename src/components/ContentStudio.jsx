@@ -37,7 +37,7 @@ const TOPIC_CATEGORIES = [
   {
     label: 'Behind the Scenes',
     topics: [
-      'A day at the bungalow',
+      'A day at the studio',
       'Why I became an esthetician',
       'What I wish every client knew before their appointment',
       'The story behind Fresh Face Studio',
@@ -62,13 +62,15 @@ const CONTENT_TYPES = [
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function buildSystemPrompt(contentType) {
-  const basePrompt = `You are Maria's content writing assistant for Fresh Face Studio, a boutique skincare studio in a 1950s beach bungalow in North Myrtle Beach, SC.
+  const basePrompt = `You are Maria's content writing assistant for Fresh Face Studio, a boutique skincare studio in a 1950s beach house in North Myrtle Beach, SC.
 
 Maria's voice is: warm, personal, knowledgeable but never clinical, a little bit funny, like a friend who happens to be a skincare expert. She says things like 'it's not just skincare, it's soul care.' She's passionate about her clients and treats every face like the only one that matters.
 
 Fresh Face Studio offers: Classic Facials ($90), Custom Facials ($140), Back Facials ($110), Chemical Peels ($130), Microneedling ($250+), Nanoneedling LuminFusion ($150), MicroPeels ($150), Dermaplaning ($50), Lash Lift & Tint ($85), Brow Lamination & Tint ($75), Brow Tint ($30), Brow Lamination ($40), Lip Wax ($20), Brow Wax ($20), Microdermabrasion Add-On ($40).
 
-The studio is in a renovated 1950s beach bungalow. Maria uses Dermalogica products. She offers house calls. Open Mon-Sat 9-5. Phone: (843) 457-2448. Website: yourfreshface.com. Instagram: @freshface.studio.`;
+The studio is in a renovated 1950s beach house. When you write about the setting, use phrases like "the studio," "the space," or "the 1950s beach house." Do NOT use the word "bungalow" — that word is reserved for one specific section on the About page and should not appear in newly generated content.
+
+Maria uses Dermalogica products. She offers house calls. Open Mon-Sat 9-5. Phone: (843) 457-2448. Website: yourfreshface.com. Instagram: @freshface.studio.`;
 
   if (contentType === 'blog') {
     return `${basePrompt}

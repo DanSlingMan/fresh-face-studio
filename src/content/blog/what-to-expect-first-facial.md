@@ -30,7 +30,7 @@ If you've never had a professional facial before, here's exactly what to expect.
 
 **Extractions.** Okay, I know this is the one people are nervous about. TikTok has done a lot of damage here — those extraction videos are dramatic on purpose. In real life, at a professional facial, extractions are careful and controlled. I only extract what your skin is ready to release. There might be a brief moment of pressure, but it's not painful, and I'll always tell you what I'm about to do. Most clients are surprised by how manageable it is.
 
-**Mask.** Chosen specifically for what your skin needs — hydration, calming, brightening, firming. This is the part where most people almost fall asleep. (The bungalow is very quiet. There's usually soft music. It's cozy.)
+**Mask.** Chosen specifically for what your skin needs — hydration, calming, brightening, firming. This is the part where most people almost fall asleep. (The space is very quiet. There's usually soft music. It's cozy.)
 
 **Serums, moisturizer, and SPF.** The final layers go on while your skin is in the best possible state to absorb them. You'll feel the difference immediately.
 
@@ -50,7 +50,7 @@ Stay out of direct sun for the rest of the day and wear SPF the next morning.
 
 Every 4–6 weeks is ideal — that's roughly aligned with your skin's natural cell turnover cycle. But honestly, even coming in quarterly makes a real difference. Consistency is the whole game in skincare.
 
-This isn't a clinical room with fluorescent lights and a paper sheet on the table. You're in a renovated 1950s beach bungalow, and you will be the only client in the studio. That matters to me. I want you to feel taken care of, not processed.
+This isn't a clinical room with fluorescent lights and a paper sheet on the table. You're in a renovated 1950s beach house, and you will be the only client in the studio. That matters to me. I want you to feel taken care of, not processed.
 
 Ready to try it? A [Classic Facial ($90)](https://freshfacestudio.glossgenius.com/book) is the perfect starting point. We'll go at your pace, and I'll answer every question you have.
 

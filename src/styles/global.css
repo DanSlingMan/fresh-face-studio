@@ -237,35 +237,17 @@ p + p { margin-top: var(--space-md); }
   transform: translateY(-1px);
 }
 
-/* GlossGenius handoff CTA — coral→lavender gradient.
-   Apply alongside .btn--primary on Book CTAs that lead to GlossGenius
-   (directly or via the /book on-ramp). Text-shadow boosts legibility on
-   the lighter lavender end where white text contrast drops. */
-.btn--gg {
-  background: var(--color-gg-gradient);
-  background-color: #DF7D65; /* fallback for browsers without gradient support */
-  color: white;
-  border-color: transparent;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+/* Replaces the retired .btn--sage. Warm-mode appearance mirrors .btn--secondary
+   (transparent + charcoal border + charcoal text) — same outlined-secondary
+   semantics, future-aligned. Dark-mode treatment overridden below. */
+.btn--outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--text-primary);
 }
-.btn--gg:hover {
-  background: var(--color-gg-gradient);
-  filter: brightness(0.92);
-  color: white;
-  border-color: transparent;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(180, 130, 165, 0.35);
-}
-
-.btn--sage {
-  background-color: var(--color-sage);
-  color: white;
-  border-color: var(--color-sage);
-}
-.btn--sage:hover {
-  background-color: var(--color-sage-dark);
-  border-color: var(--color-sage-dark);
-  color: white;
+.btn--outline:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
   transform: translateY(-1px);
 }
 
@@ -463,4 +445,60 @@ p + p { margin-top: var(--space-md); }
 }
 .skip-link:focus {
   top: var(--space-md);
+}
+
+/* =====================================================================
+   DARK-MODE OVERRIDES — Reskin Commit B (buttons only; nav and footer
+   live in their own component <style> blocks).
+   Activated by data-tokens="dark" on <html>, set in BaseLayout from the
+   USE_DARK_TOKENS env var. Warm rules above are untouched.
+   ===================================================================== */
+
+html[data-tokens="dark"] .btn {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  border-radius: var(--radius-pill);
+  padding: 0.75rem 2rem;
+  font-size: 0.875rem;
+  border-width: 1px;
+  border-style: solid;
+  transition: filter 0.2s, transform 0.2s, background 0.2s, border-color 0.2s;
+}
+html[data-tokens="dark"] .btn--sm {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.75rem;
+}
+html[data-tokens="dark"] .btn--lg {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+}
+
+html[data-tokens="dark"] .btn--primary {
+  background: var(--color-accent-gradient);
+  background-color: var(--color-accent-coral);
+  color: white;
+  border-color: transparent;
+  text-shadow: none;
+  box-shadow: none;
+}
+html[data-tokens="dark"] .btn--primary:hover {
+  background: var(--color-accent-gradient);
+  background-color: var(--color-accent-coral);
+  filter: brightness(0.92);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+
+html[data-tokens="dark"] .btn--outline {
+  background: transparent;
+  color: var(--color-text-primary);
+  border-color: var(--color-border-strong);
+}
+html[data-tokens="dark"] .btn--outline:hover {
+  border-color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
 }

@@ -6,6 +6,13 @@ import '../styles/global.css';
    without it, this resolves to an empty stub and the production CSS is unchanged. */
 import '@active-dark-tokens';
 
+/* Mirrors the env check in astro.config.mjs. Drives the data-tokens attribute on
+   <html>, which scopes all dark-mode CSS overrides via html[data-tokens="dark"].
+   Two reads, one source of truth (the USE_DARK_TOKENS env var). */
+const USE_DARK_TOKENS =
+  process.env.USE_DARK_TOKENS === 'true' || process.env.USE_DARK_TOKENS === '1';
+const tokensAttr = USE_DARK_TOKENS ? 'dark' : 'warm';
+
 interface Props {
   title: string;
   description: string;
@@ -71,7 +78,7 @@ const localBusinessSchema = {
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-tokens={tokensAttr}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />

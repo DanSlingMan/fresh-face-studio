@@ -38,7 +38,7 @@ const navLinks = [
       </ul>
     </nav>
 
-    <a href="/book" class="btn btn--primary btn--sm btn--gg site-header__cta">
+    <a href="/book" class="btn btn--primary btn--sm site-header__cta">
       Book Now
     </a>
 
@@ -69,7 +69,7 @@ const navLinks = [
         </li>
       ))}
     </ul>
-    <a href="/book" class="btn btn--primary btn--lg btn--gg mobile-nav__cta">
+    <a href="/book" class="btn btn--primary btn--lg mobile-nav__cta">
       Book Now
     </a>
     <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`} class="mobile-nav__phone">
@@ -227,6 +227,64 @@ const navLinks = [
 
   @media (min-width: 900px) {
     .mobile-nav { display: none; }
+  }
+
+  /* ===== DARK-MODE OVERRIDES (Reskin Commit B) =====
+     Activated by data-tokens="dark" on <html>. Warm rules above untouched. */
+
+  html[data-tokens="dark"] .site-header {
+    background: transparent;
+    border-bottom: none;
+  }
+  html[data-tokens="dark"] .site-header.is-scrolled {
+    background: var(--color-bg-primary);
+    border-bottom: 1px solid var(--color-border-subtle);
+    box-shadow: none;
+  }
+
+  html[data-tokens="dark"] .logo-text {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-light);
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  html[data-tokens="dark"] .site-nav__link {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-light);
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-extra-wide);
+    border-bottom-color: transparent;
+  }
+  html[data-tokens="dark"] .site-nav__link:hover,
+  html[data-tokens="dark"] .site-nav__link.is-active {
+    color: var(--color-accent-coral);
+    border-bottom-color: var(--color-accent-coral);
+  }
+
+  html[data-tokens="dark"] .site-header__toggle span {
+    background: var(--color-text-primary);
+  }
+
+  html[data-tokens="dark"] .mobile-nav {
+    background: var(--color-bg-primary);
+  }
+  html[data-tokens="dark"] .mobile-nav__link {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-light);
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+  html[data-tokens="dark"] .mobile-nav__link:hover,
+  html[data-tokens="dark"] .mobile-nav__link.is-active {
+    color: var(--color-accent-coral);
+  }
+  html[data-tokens="dark"] .mobile-nav__phone {
+    color: var(--color-text-secondary);
   }
 </style>
 

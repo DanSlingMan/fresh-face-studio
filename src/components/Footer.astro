@@ -46,7 +46,7 @@ import { business } from '../data/site';
       <div class="footer-cta">
         <h4>Ready for Better Skin?</h4>
         <p>Book your appointment at our North Myrtle Beach studio.</p>
-        <a href={business.booking.url} class="btn btn--primary btn--gg" target="_blank" rel="noopener">
+        <a href={business.booking.url} class="btn btn--primary" target="_blank" rel="noopener">
           Book Now
         </a>
       </div>
@@ -177,5 +177,71 @@ import { business } from '../data/site';
   }
   .footer-studio-link:hover {
     color: var(--color-warm-gray-light);
+  }
+
+  /* ===== DARK-MODE OVERRIDES (Reskin Commit B) =====
+     Activated by data-tokens="dark" on <html>. Warm rules above untouched. */
+
+  html[data-tokens="dark"] .site-footer {
+    background-color: var(--color-bg-primary);
+    border-top: 1px solid var(--color-border-subtle);
+    color: var(--color-text-secondary);
+    padding: var(--space-xl) 0 var(--space-lg);
+  }
+
+  html[data-tokens="dark"] .footer-logo {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-light);
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    white-space: nowrap;
+  }
+
+  html[data-tokens="dark"] .footer-tagline,
+  html[data-tokens="dark"] .footer-address {
+    color: var(--color-text-secondary);
+  }
+
+  html[data-tokens="dark"] .footer-phone {
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-regular);
+  }
+  html[data-tokens="dark"] .footer-phone:hover {
+    color: var(--color-accent-coral);
+  }
+
+  html[data-tokens="dark"] .footer-nav h4,
+  html[data-tokens="dark"] .footer-cta h4 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-light);
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  html[data-tokens="dark"] .footer-nav a {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .footer-nav a:hover {
+    color: var(--color-accent-coral);
+  }
+
+  html[data-tokens="dark"] .footer-cta p {
+    color: var(--color-text-secondary);
+  }
+
+  html[data-tokens="dark"] .footer-bottom {
+    border-top-color: var(--color-border-subtle);
+  }
+  html[data-tokens="dark"] .footer-bottom p,
+  html[data-tokens="dark"] .footer-bottom__serving {
+    color: var(--color-text-muted);
+  }
+  html[data-tokens="dark"] .footer-studio-link {
+    color: var(--color-text-muted);
+  }
+  html[data-tokens="dark"] .footer-studio-link:hover {
+    color: var(--color-accent-coral);
   }
 </style>

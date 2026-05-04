@@ -1,0 +1,5 @@
+/*
+ * Stub loaded in place of tokens.dark.css when USE_DARK_TOKENS is not set.
+ * The swap is controlled by the @active-dark-tokens alias in astro.config.mjs.
+ * Do not put rules here — keep this file empty so production CSS stays clean.
+ */

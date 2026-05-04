@@ -1,0 +1,84 @@
+/*
+ * Fresh Face Studio — Dark Token Set (GlossGenius reskin)
+ *
+ * Mirrors Section 1 of fresh-face-reskin-design-brief.md.
+ * Loaded conditionally by BaseLayout.astro when import.meta.env.USE_DARK_TOKENS is set.
+ * No component currently references these variables — loading is a no-op visually
+ * until Commit B begins wiring components to the new system.
+ */
+
+:root {
+  /* Backgrounds */
+  --color-bg-primary: #0F0F11;          /* near-black, the dominant surface */
+  --color-bg-elevated: #1A1A1D;         /* card/panel surfaces, slightly lifted */
+  --color-bg-overlay: rgba(15, 15, 17, 0.85);  /* hero image overlays */
+
+  /* Text */
+  --color-text-primary: #FFFFFF;        /* headings, primary text on dark */
+  --color-text-secondary: #B8B8BC;      /* secondary copy, captions, eyebrow labels */
+  --color-text-muted: #6E6E72;          /* meta, dates, subtle UI */
+
+  /* Accent — the GG coral-lavender gradient */
+  --color-accent-coral: #DF7D65;
+  --color-accent-lavender: #DDBEE3;
+  --color-accent-gradient: linear-gradient(to right, #DF7D65, #DDBEE3);
+  --color-accent-gradient-vertical: linear-gradient(to bottom, #DF7D65, #DDBEE3);
+
+  /* Borders, dividers */
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.20);
+
+  /* States */
+  --color-link: #DF7D65;                /* coral end of gradient as default link */
+  --color-link-hover: #DDBEE3;          /* shifts to lavender on hover */
+  --color-focus-ring: #DF7D65;
+
+  /* Font families */
+  --font-heading: 'Jost', 'Futura', 'Trebuchet MS', sans-serif;
+  --font-body: 'Jost', 'Futura', 'Trebuchet MS', sans-serif;
+  /* GG uses the same family for both — single typeface system */
+
+  /* Weights — Jost ships with the full range */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Heading sizes — match GG's small-caps editorial cadence */
+  --font-size-h1: clamp(2rem, 4vw, 3rem);
+  --font-size-h2: clamp(1.5rem, 2.5vw, 2rem);
+  --font-size-h3: 1.25rem;
+
+  /* Body */
+  --font-size-body: 1rem;
+  --font-size-small: 0.875rem;
+  --font-size-eyebrow: 0.75rem;
+
+  /* Letter spacing — GG's signature is wide tracking on uppercase headings */
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.15em;        /* uppercase headings */
+  --letter-spacing-extra-wide: 0.25em;  /* eyebrows, nav, footer links */
+
+  /* Line heights */
+  --line-height-heading: 1.2;
+  --line-height-body: 1.6;
+
+  /* GG uses generous spacing — keep this system, just retuned */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-2xl: 8rem;
+
+  /* Border radii — GG uses pill buttons + minimal rounding elsewhere */
+  --radius-pill: 999px;
+  --radius-card: 4px;
+  --radius-image: 0;
+
+  /* Shadows — barely visible on dark, used sparingly */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 32px rgba(223, 125, 101, 0.15);  /* coral aura on focused elements */
+}

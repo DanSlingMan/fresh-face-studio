@@ -241,4 +241,10 @@ const posts = (await getCollection('blog')).sort(
     background: var(--color-bg-elevated);
     border-radius: var(--radius-card);
   }
+
+  /* Commit D: empty-state copy (no pagination/category filters exist on
+     this page, so nothing further to restyle here). */
+  html[data-tokens="dark"] .blog-empty p {
+    color: var(--color-text-secondary);
+  }
 </style>

@@ -56,4 +56,13 @@ import { business } from '../data/site';
     gap: var(--space-md);
     flex-wrap: wrap;
   }
+
+  /* ===== DARK-MODE OVERRIDES (Reskin Commit D) =====
+     Activated by data-tokens="dark" on <html>. Warm rules above untouched. */
+  html[data-tokens="dark"] .not-found h1 {
+    color: var(--color-border-strong);
+  }
+  html[data-tokens="dark"] .not-found__message {
+    color: var(--color-text-secondary);
+  }
 </style>

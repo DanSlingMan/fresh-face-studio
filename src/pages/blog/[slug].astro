@@ -252,4 +252,72 @@ const articleSchema = {
     max-width: 460px;
     margin: 0 auto var(--space-lg);
   }
+
+  /* ===== DARK-MODE OVERRIDES (Reskin Commit D) =====
+     Strict dark per brief Decision #6 / §4.9. FLAG FOR MARIA: long-form
+     readability on near-black is a known fatigue tradeoff (brief Risk #1) —
+     surface this in the Commit E preview review. Warm rules above untouched. */
+  html[data-tokens="dark"] .back-link {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .back-link:hover {
+    color: var(--color-accent-coral);
+  }
+  html[data-tokens="dark"] .blog-post__header {
+    border-bottom-color: var(--color-border-subtle);
+  }
+  html[data-tokens="dark"] .blog-post__meta {
+    color: var(--color-text-muted);
+  }
+  html[data-tokens="dark"] .tag-pill {
+    color: var(--color-accent-coral);
+    background: rgba(223, 125, 101, 0.12);
+  }
+  html[data-tokens="dark"] .prose {
+    color: var(--color-text-primary);
+  }
+  html[data-tokens="dark"] .prose :global(h2),
+  html[data-tokens="dark"] .prose :global(h3) {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-light);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-text-primary);
+  }
+  html[data-tokens="dark"] .prose :global(p) {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .prose :global(strong) {
+    color: var(--color-text-primary);
+  }
+  html[data-tokens="dark"] .prose :global(a) {
+    color: var(--color-link);
+  }
+  html[data-tokens="dark"] .prose :global(a:hover) {
+    color: var(--color-link-hover);
+  }
+  html[data-tokens="dark"] .prose :global(ul),
+  html[data-tokens="dark"] .prose :global(ol) {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .prose :global(blockquote) {
+    border-left-color: var(--color-accent-coral);
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .prose :global(th) {
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+    border-color: var(--color-border-subtle);
+  }
+  html[data-tokens="dark"] .prose :global(td) {
+    color: var(--color-text-secondary);
+    border-color: var(--color-border-subtle);
+  }
+  html[data-tokens="dark"] .prose :global(hr) {
+    border-top-color: var(--color-border-subtle);
+  }
+  html[data-tokens="dark"] .blog-cta {
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-card);
+  }
 </style>

@@ -86,7 +86,7 @@ const designs = [
   <!-- BOTTOM CTA -->
   <section class="section section--charcoal">
     <div class="container container--narrow" style="text-align:center;">
-      <p class="section-header__eyebrow" style="color:var(--color-terracotta);">Ready to Send</p>
+      <p class="section-header__eyebrow">Ready to Send</p>
       <h2 style="color:white; margin-bottom:var(--space-md);">Send a Gift Card</h2>
       <p style="color:rgba(255,255,255,0.8); margin-bottom:var(--space-xl); max-width:520px; margin-left:auto; margin-right:auto;">
         Gift cards are issued and delivered through GlossGenius. Pick the amount, the
@@ -181,5 +181,33 @@ const designs = [
     border-radius: 999px;
     font-size: var(--text-sm);
     color: var(--text-primary);
+  }
+
+  /* ===== DARK-MODE OVERRIDES (Reskin Commit D) =====
+     Activated by data-tokens="dark" on <html>. Warm rules above untouched. */
+  html[data-tokens="dark"] .shop-eyebrow {
+    color: var(--color-accent-coral);
+    font-family: var(--font-heading);
+    letter-spacing: var(--letter-spacing-extra-wide);
+  }
+  html[data-tokens="dark"] .shop-hero {
+    background: var(--color-bg-elevated);
+  }
+  html[data-tokens="dark"] .gift-chip {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-subtle);
+    color: var(--color-accent-coral);
+    font-family: var(--font-heading);
+  }
+  html[data-tokens="dark"] .gift-chip--custom {
+    background: rgba(223, 125, 101, 0.12);
+    border-color: transparent;
+    color: var(--color-accent-coral);
+    font-family: var(--font-heading);
+  }
+  html[data-tokens="dark"] .design-list li {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-subtle);
+    color: var(--color-text-secondary);
   }
 </style>

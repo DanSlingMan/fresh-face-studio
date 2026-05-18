@@ -211,4 +211,51 @@ const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURICompo
     color: var(--accent);
     letter-spacing: 0.04em;
   }
+
+  /* ===== DARK-MODE OVERRIDES (Reskin Commit D) =====
+     Activated by data-tokens="dark" on <html>. Warm rules above untouched.
+     There is no contact form on this page — info blocks + a styled map
+     placeholder div (not a Google Maps iframe), so no input styling needed. */
+  html[data-tokens="dark"] .contact-eyebrow {
+    color: var(--color-accent-coral);
+    font-family: var(--font-heading);
+    letter-spacing: var(--letter-spacing-extra-wide);
+  }
+  html[data-tokens="dark"] .contact-block h3 {
+    color: var(--color-accent-coral);
+    font-family: var(--font-heading);
+  }
+  html[data-tokens="dark"] .contact-block p {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .contact-address {
+    color: var(--color-text-secondary) !important;
+  }
+  html[data-tokens="dark"] .contact-address:hover {
+    color: var(--color-accent-coral) !important;
+  }
+  html[data-tokens="dark"] .contact-phone {
+    font-family: var(--font-heading);
+    color: var(--color-text-primary) !important;
+  }
+  html[data-tokens="dark"] .contact-phone:hover {
+    color: var(--color-accent-coral) !important;
+  }
+  html[data-tokens="dark"] .map-placeholder {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-subtle);
+  }
+  html[data-tokens="dark"] .map-link:hover .map-placeholder {
+    border-color: var(--color-accent-coral);
+    box-shadow: var(--shadow-glow);
+  }
+  html[data-tokens="dark"] .map-placeholder__inner p {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .map-placeholder__inner svg path {
+    fill: var(--color-accent-coral);
+  }
+  html[data-tokens="dark"] .map-cta {
+    color: var(--color-accent-coral);
+  }
 </style>

@@ -108,7 +108,7 @@ const packages = [
   <!-- BOTTOM CTA -->
   <section class="section section--charcoal">
     <div class="container container--narrow" style="text-align:center;">
-      <p class="section-header__eyebrow" style="color:var(--color-terracotta);">Not Sure Which One?</p>
+      <p class="section-header__eyebrow">Not Sure Which One?</p>
       <h2 style="color:white; margin-bottom:var(--space-md);">Ask First. Buy Second.</h2>
       <p style="color:rgba(255,255,255,0.8); margin-bottom:var(--space-xl); max-width:520px; margin-left:auto; margin-right:auto;">
         Every package is sold through GlossGenius, but if you want to talk through which
@@ -225,4 +225,47 @@ const packages = [
     color: var(--text-primary);
   }
   .package-card__cta a { width: 100%; justify-content: center; }
+
+  /* ===== DARK-MODE OVERRIDES (Reskin Commit D) =====
+     Activated by data-tokens="dark" on <html>. Warm rules above untouched. */
+  html[data-tokens="dark"] .shop-eyebrow {
+    color: var(--color-accent-coral);
+    font-family: var(--font-heading);
+    letter-spacing: var(--letter-spacing-extra-wide);
+  }
+  html[data-tokens="dark"] .shop-hero {
+    background: var(--color-bg-elevated);
+  }
+  html[data-tokens="dark"] .package-card {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-subtle);
+    border-radius: var(--radius-card);
+  }
+  html[data-tokens="dark"] .package-card:hover {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-card);
+  }
+  html[data-tokens="dark"] .package-card__top {
+    border-bottom-color: var(--color-border-subtle);
+  }
+  html[data-tokens="dark"] .package-card__name {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-light);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-text-primary);
+  }
+  html[data-tokens="dark"] .package-card__price {
+    font-family: var(--font-heading);
+    color: var(--color-accent-coral);
+  }
+  html[data-tokens="dark"] .package-card__save {
+    color: var(--color-accent-lavender);
+  }
+  html[data-tokens="dark"] .package-card__blurb {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .package-card__best {
+    color: var(--color-text-secondary);
+  }
 </style>

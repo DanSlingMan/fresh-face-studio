@@ -62,7 +62,7 @@ import { business } from '../data/site';
   </section>
 
   <!-- SPLIT: The Bungalow (reversed) -->
-  <section class="split-section" style="background:var(--bg-secondary);" aria-labelledby="bungalow-about-heading">
+  <section class="split-section split-section--alt" aria-labelledby="bungalow-about-heading">
     <div class="split-section__body split-section__body--padded split-section__body--reversed">
       <p class="about-eyebrow">The Space</p>
       <h2 id="bungalow-about-heading">The Bungalow</h2>
@@ -314,5 +314,48 @@ import { business } from '../data/site';
     color: rgba(255,255,255,0.82);
     margin-bottom: var(--space-xl);
     font-size: var(--text-lg);
+  }
+
+  /* Replaces the former inline background on the Bungalow section so the
+     surface is themeable. Warm value is unchanged (cream). */
+  .split-section--alt {
+    background: var(--bg-secondary);
+  }
+
+  /* ===== DARK-MODE OVERRIDES (Reskin Commit D) =====
+     Activated by data-tokens="dark" on <html>. Warm rules above untouched. */
+  html[data-tokens="dark"] .about-eyebrow {
+    color: var(--color-accent-coral);
+    font-family: var(--font-heading);
+    letter-spacing: var(--letter-spacing-extra-wide);
+  }
+  html[data-tokens="dark"] .split-section--alt {
+    background: var(--color-bg-elevated);
+  }
+  html[data-tokens="dark"] .split-section__img {
+    background: var(--color-bg-elevated);
+  }
+  html[data-tokens="dark"] .gallery-item {
+    background: var(--color-bg-elevated);
+  }
+  html[data-tokens="dark"] .info-block p {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .info-phone {
+    font-family: var(--font-heading);
+    color: var(--color-text-primary) !important;
+  }
+  html[data-tokens="dark"] .info-phone:hover {
+    color: var(--color-accent-coral) !important;
+  }
+  html[data-tokens="dark"] .about-cta {
+    background: var(--color-bg-elevated);
+  }
+  html[data-tokens="dark"] .about-cta__overlay {
+    background: radial-gradient(
+      ellipse at 80% 50%,
+      rgba(223, 125, 101, 0.12) 0%,
+      transparent 70%
+    );
   }
 </style>

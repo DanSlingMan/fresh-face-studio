@@ -615,3 +615,14 @@ html[data-tokens="dark"] .btn--secondary:hover {
   color: var(--color-text-primary);
   transform: translateY(-1px);
 }
+
+/* =====================================================================
+   DARK-MODE OVERRIDES — Reskin Commit D: shared text utilities.
+   ===================================================================== */
+
+html[data-tokens="dark"] .text-secondary {
+  color: var(--color-text-secondary);
+}
+html[data-tokens="dark"] .text-accent {
+  color: var(--color-accent-coral);
+}

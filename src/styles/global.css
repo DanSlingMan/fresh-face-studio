@@ -502,3 +502,116 @@ html[data-tokens="dark"] .btn--outline:hover {
   color: var(--color-text-primary);
   transform: translateY(-1px);
 }
+
+/* =====================================================================
+   DARK-MODE OVERRIDES — Reskin Commit C: global foundation.
+   Body surface, Jost heading system, body/link colors, eyebrow labels,
+   section-background utilities, card, image overlays, page heroes.
+   Appended after Commit B rules; warm rules above are untouched.
+   ===================================================================== */
+
+html[data-tokens="dark"] body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+}
+
+/* Jost heading system — uppercase, light, wide-tracked (brief §2).
+   Global per Daniel's decision: also reaches /studio and blog post bodies. */
+html[data-tokens="dark"] h1,
+html[data-tokens="dark"] h2,
+html[data-tokens="dark"] h3,
+html[data-tokens="dark"] h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-light);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-text-primary);
+}
+html[data-tokens="dark"] h1 {
+  letter-spacing: var(--letter-spacing-extra-wide);
+}
+
+html[data-tokens="dark"] p {
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+}
+
+/* Body-content links only — scoped to <main> so header/footer link rules
+   (Commit B) and .btn rules are not overridden. */
+html[data-tokens="dark"] main a:not(.btn) {
+  color: var(--color-link);
+}
+html[data-tokens="dark"] main a:not(.btn):hover {
+  color: var(--color-link-hover);
+}
+
+/* Eyebrow labels — coral, Jost, extra-wide tracking */
+html[data-tokens="dark"] .eyebrow,
+html[data-tokens="dark"] .section-header__eyebrow {
+  color: var(--color-accent-coral);
+  font-family: var(--font-heading);
+  letter-spacing: var(--letter-spacing-extra-wide);
+}
+
+/* Section background utilities */
+html[data-tokens="dark"] .section--alt,
+html[data-tokens="dark"] .section--sage {
+  background-color: var(--color-bg-elevated);
+}
+html[data-tokens="dark"] .section--dark,
+html[data-tokens="dark"] .section--charcoal {
+  background-color: var(--color-bg-primary);
+}
+
+/* Card */
+html[data-tokens="dark"] .card {
+  background: var(--color-bg-elevated);
+  border-color: var(--color-border-subtle);
+  border-radius: var(--radius-card);
+}
+html[data-tokens="dark"] .card:hover {
+  box-shadow: var(--shadow-card);
+}
+
+/* Full-bleed image-section overlay → darker token treatment */
+html[data-tokens="dark"] .img-section__overlay {
+  background: var(--color-bg-overlay);
+}
+
+/* Page hero (non-home inner pages: about/services/blog/contact/shop) */
+html[data-tokens="dark"] .page-hero-img {
+  background: var(--color-bg-primary);
+}
+html[data-tokens="dark"] .page-hero-img__bg {
+  opacity: 0.4;
+}
+html[data-tokens="dark"] .page-hero-img__content h1 {
+  color: var(--color-text-primary);
+  text-shadow: none;
+}
+html[data-tokens="dark"] .page-hero-img__content p {
+  color: var(--color-text-secondary);
+}
+
+/* Skip link */
+html[data-tokens="dark"] .skip-link {
+  background: var(--color-accent-coral);
+  color: var(--color-text-primary);
+}
+
+/* .btn--secondary was not migrated to the dark system in Commit B and is
+   still used on the homepage (and 404/contact). Brief §4.1 treats the
+   secondary CTA as the outline style; mirror the .btn--outline dark rules
+   so it is legible on near-black. */
+html[data-tokens="dark"] .btn--secondary {
+  background: transparent;
+  color: var(--color-text-primary);
+  border-color: var(--color-border-strong);
+}
+html[data-tokens="dark"] .btn--secondary:hover {
+  border-color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+}

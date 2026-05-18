@@ -158,7 +158,7 @@ import { business, services, GLOSSGENIUS_URLS } from '../data/site';
   <section class="testimonials section--dark" aria-labelledby="testimonials-heading">
     <div class="container">
       <div class="testimonials__header">
-        <p class="section-header__eyebrow" style="color:var(--color-terracotta);">Client Love</p>
+        <p class="section-header__eyebrow">Client Love</p>
         <h2 id="testimonials-heading" style="color:white;">What Our Clients Say</h2>
       </div>
       <div class="testimonial-carousel" id="testimonialCarousel" aria-live="polite">
@@ -797,6 +797,101 @@ import { business, services, GLOSSGENIUS_URLS } from '../data/site';
   }
   .cta-phone:hover {
     color: white;
+  }
+
+  /* =====================================================================
+     DARK-MODE OVERRIDES (Reskin Commit C) — hero, trust strip, service
+     highlights, testimonial carousel. Activated by data-tokens="dark" on
+     <html>. Warm rules above are untouched. Story/perks/location/CTA
+     sections are deliberately left for Commit D.
+     ===================================================================== */
+
+  /* ----- Hero ----- */
+  html[data-tokens="dark"] .hero-fullbleed__overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(15, 15, 17, 0.6) 0%,
+      rgba(15, 15, 17, 0.85) 100%
+    );
+  }
+  html[data-tokens="dark"] .hero-eyebrow {
+    color: var(--color-accent-coral);
+    font-family: var(--font-heading);
+    letter-spacing: var(--letter-spacing-extra-wide);
+  }
+  html[data-tokens="dark"] .hero-title {
+    color: var(--color-text-primary);
+    text-shadow: none;
+  }
+  html[data-tokens="dark"] .hero-title em {
+    color: var(--color-text-primary);
+    font-style: normal;
+  }
+  html[data-tokens="dark"] .hero-subtitle {
+    color: rgba(255, 255, 255, 0.88);
+    font-family: var(--font-body);
+  }
+
+  /* ----- Trust strip ----- */
+  html[data-tokens="dark"] .trust-bar {
+    background: var(--color-bg-elevated);
+    border-top-color: var(--color-border-subtle);
+    border-bottom-color: var(--color-border-subtle);
+  }
+  html[data-tokens="dark"] .trust-item strong {
+    color: var(--color-text-primary);
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-light);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+  html[data-tokens="dark"] .trust-item span {
+    color: var(--color-text-secondary);
+  }
+
+  /* ----- Service highlights ----- */
+  html[data-tokens="dark"] .highlight-card {
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-card);
+  }
+  html[data-tokens="dark"] .highlight-card__overlay {
+    background: linear-gradient(
+      to top,
+      rgba(15, 15, 17, 0.85) 30%,
+      rgba(15, 15, 17, 0.2) 100%
+    );
+  }
+  html[data-tokens="dark"] .highlight-card:hover .highlight-card__overlay {
+    background: linear-gradient(
+      to top,
+      rgba(15, 15, 17, 0.92) 40%,
+      rgba(15, 15, 17, 0.3) 100%
+    );
+  }
+  html[data-tokens="dark"] .highlight-card__label span {
+    color: var(--color-accent-coral);
+  }
+
+  /* ----- Testimonial carousel ----- */
+  html[data-tokens="dark"] .testimonials {
+    background: var(--color-bg-primary);
+  }
+  html[data-tokens="dark"] .testimonial-slide {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    padding: 2.5rem 2rem;
+  }
+  html[data-tokens="dark"] .testimonial-quote-text p {
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-style: normal;
+  }
+  html[data-tokens="dark"] .testimonial-cite {
+    color: var(--color-accent-coral);
+  }
+  html[data-tokens="dark"] .testimonial-dot.is-active {
+    background: var(--color-accent-coral);
   }
 </style>
 

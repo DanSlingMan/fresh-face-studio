@@ -97,4 +97,48 @@ const { slug, name, price, priceNote, duration, shortDescription, featured } = A
     padding-top: var(--space-md);
     border-top: 1px solid var(--border);
   }
+
+  /* ===== DARK-MODE OVERRIDES (Reskin Commit C) =====
+     Activated by data-tokens="dark" on <html>. Warm rules above untouched. */
+
+  html[data-tokens="dark"] .service-card {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-subtle);
+    border-radius: var(--radius-card);
+  }
+  html[data-tokens="dark"] .service-card:hover {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-card);
+  }
+  html[data-tokens="dark"] .service-card--featured {
+    border-color: var(--color-accent-coral);
+    background: var(--color-bg-elevated);
+  }
+
+  html[data-tokens="dark"] .service-card__name {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-light);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-text-primary);
+  }
+
+  html[data-tokens="dark"] .service-card__price {
+    color: var(--color-accent-coral);
+  }
+  html[data-tokens="dark"] .price-note {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .service-card__divider {
+    color: var(--color-text-muted);
+  }
+  html[data-tokens="dark"] .service-card__duration {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .service-card__desc {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .service-card__action {
+    border-top-color: var(--color-border-subtle);
+  }
 </style>

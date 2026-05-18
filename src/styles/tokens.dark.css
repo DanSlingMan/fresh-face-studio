@@ -64,13 +64,19 @@
   --line-height-heading: 1.2;
   --line-height-body: 1.6;
 
-  /* GG uses generous spacing — keep this system, just retuned */
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 2rem;
-  --space-lg: 4rem;
-  --space-xl: 6rem;
-  --space-2xl: 8rem;
+  /* Spacing scale — matches the warm scale 1:1.
+     NOTE (Commit E fix): these were originally set 2-3x larger as a
+     "retuned generous" scale, but the same tokens drive component-level
+     padding and gaps (card padding, nav gap), so the larger values
+     inflated every card and spread the nav out. The generous GG feel
+     comes from the section-level scale (--space-3xl..5xl, warm-only) and
+     layout, not from tripling card padding. Kept equal to warm. */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
 
   /* Border radii — GG uses pill buttons + minimal rounding elsewhere */
   --radius-pill: 999px;

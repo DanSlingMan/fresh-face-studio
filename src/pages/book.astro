@@ -295,4 +295,72 @@ function truncate(text: string, max: number): string {
     font-size: var(--text-sm);
     line-height: 1.7;
   }
+
+  /* ===== DARK-MODE OVERRIDES (Reskin Commit E fix) =====
+     book.astro was missed by the Commit C/D scope — added here so the
+     booking + info cards render in the dark system instead of warm white.
+     Activated by data-tokens="dark" on <html>. Warm rules above untouched. */
+  html[data-tokens="dark"] .book-eyebrow {
+    color: var(--color-accent-coral);
+    font-family: var(--font-heading);
+    letter-spacing: var(--letter-spacing-extra-wide);
+  }
+  html[data-tokens="dark"] .booking-category__header {
+    border-bottom-color: var(--color-border-subtle);
+  }
+
+  html[data-tokens="dark"] .booking-card {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-subtle);
+    border-radius: var(--radius-card);
+  }
+  html[data-tokens="dark"] .booking-card:hover {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-card);
+  }
+  html[data-tokens="dark"] .booking-card__duration {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .booking-card__price {
+    font-family: var(--font-heading);
+    color: var(--color-accent-coral);
+  }
+  html[data-tokens="dark"] .booking-card__name {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-light);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-text-primary);
+  }
+  html[data-tokens="dark"] .booking-card__desc {
+    color: var(--color-text-secondary);
+  }
+
+  html[data-tokens="dark"] .phone-cta {
+    background: var(--color-bg-elevated);
+    border-top-color: var(--color-border-subtle);
+    border-bottom-color: var(--color-border-subtle);
+  }
+  html[data-tokens="dark"] .phone-cta p {
+    color: var(--color-text-secondary);
+  }
+  html[data-tokens="dark"] .phone-cta__link {
+    font-family: var(--font-heading);
+    color: var(--color-text-primary);
+  }
+  html[data-tokens="dark"] .phone-cta__link:hover {
+    color: var(--color-accent-coral);
+  }
+
+  html[data-tokens="dark"] .info-card {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-subtle);
+    border-radius: var(--radius-card);
+  }
+  html[data-tokens="dark"] .info-card__icon {
+    color: var(--color-accent-coral);
+  }
+  html[data-tokens="dark"] .info-card p {
+    color: var(--color-text-secondary);
+  }
 </style>

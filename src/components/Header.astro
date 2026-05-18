@@ -258,6 +258,9 @@ const navLinks = [
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-extra-wide);
     border-bottom-color: transparent;
+    /* Keep multi-word links ("Skin School") on a single line — the wide
+       tracking would otherwise wrap them. */
+    white-space: nowrap;
   }
   html[data-tokens="dark"] .site-nav__link:hover,
   html[data-tokens="dark"] .site-nav__link.is-active {

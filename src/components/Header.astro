@@ -1,5 +1,5 @@
 ---
-import { business } from '../data/site';
+import { business, GLOSSGENIUS_URLS } from '../data/site';
 
 interface Props {
   currentPath?: string;
@@ -38,7 +38,7 @@ const navLinks = [
       </ul>
     </nav>
 
-    <a href="/book" class="btn btn--primary btn--sm site-header__cta">
+    <a href={GLOSSGENIUS_URLS.booking} class="btn btn--primary btn--sm site-header__cta">
       Book Now
     </a>
 
@@ -69,7 +69,7 @@ const navLinks = [
         </li>
       ))}
     </ul>
-    <a href="/book" class="btn btn--primary btn--lg mobile-nav__cta">
+    <a href={GLOSSGENIUS_URLS.booking} class="btn btn--primary btn--lg mobile-nav__cta">
       Book Now
     </a>
     <a href={`tel:${business.phone.replace(/[^0-9]/g, '')}`} class="mobile-nav__phone">

@@ -110,13 +110,16 @@ const localBusinessSchema = {
   <meta name="geo.position" content={`${business.coordinates.lat};${business.coordinates.lng}`} />
   <meta name="ICBM" content={`${business.coordinates.lat}, ${business.coordinates.lng}`} />
 
-  <!-- Theme & manifest -->
-  <meta name="theme-color" content="#2D2926" />
-  <link rel="manifest" href="/manifest.json" />
+  <!-- Sitemap -->
   <link rel="sitemap" href="/sitemap.xml" />
 
-  <!-- Favicon — TODO: Replace with actual brand favicon -->
+  <!-- Favicons (v3 bundle, glyph color #DF7D65) -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#F5EDE3" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1B1D21" media="(prefers-color-scheme: dark)" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />

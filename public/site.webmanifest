@@ -1,0 +1,11 @@
+{
+  "name": "Fresh Face Studio",
+  "short_name": "Fresh Face",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
+  ],
+  "theme_color": "#DF7D65",
+  "background_color": "#F5EDE3",
+  "display": "browser"
+}
